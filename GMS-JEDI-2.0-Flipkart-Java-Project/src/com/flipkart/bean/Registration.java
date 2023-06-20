@@ -1,64 +1,114 @@
+/**
+ * 
+ */
 package com.flipkart.bean;
 
+import java.time.LocalDate;
+
+/**
+ * 
+ */
 public class Registration {
-	
-	private int userid;
-	private String userName;
+	private String customerId;
+	private String name;
+	private String mobile;
 	private String email;
 	private String address;
-	private long phoneNo;
-    private int adhaarNo;
-	private int gstNo;
-	private String role;
+	private LocalDate dob;
 	
-	public int getUserid() {
-		return userid;
+	private String aadhaarNumber;
+	private String panNumber;
+	private String gstNumber;
+	
+	private int roleId;
+	private String password;
+	
+
+	public String getCustomerId() {
+		return customerId;
 	}
-	public void setUserid(int userid) {
-		this.userid = userid;
+
+	public void setCustomerId(String customerId) {
+		this.customerId = customerId;
 	}
-	public String getUserName() {
-		return userName;
+
+	public String getName() {
+		return name;
 	}
-	public void setUserName(String userName) {
-		this.userName = userName;
+
+	public void setName(String name) {
+		this.name = name;
 	}
+
+	public String getMobile() {
+		return mobile;
+	}
+
+	public void setMobile(String mobile) {
+		this.mobile = mobile;
+	}
+
 	public String getEmail() {
 		return email;
 	}
+
 	public void setEmail(String email) {
 		this.email = email;
 	}
+
 	public String getAddress() {
 		return address;
 	}
+
 	public void setAddress(String address) {
 		this.address = address;
 	}
-	public long getPhoneNo() {
-		return phoneNo;
+
+	public LocalDate getDob() {
+		return dob;
 	}
-	public void setPhoneNo(long phoneNo) {
-		this.phoneNo = phoneNo;
+
+	public void setDob(LocalDate dob) {
+		this.dob = dob;
 	}
-	public int getAdhaarNo() {
-		return adhaarNo;
+
+	public String getAadhaarNumber() {
+		return aadhaarNumber;
 	}
-	public void setAdhaarNo(int adhaarNo) {
-		this.adhaarNo = adhaarNo;
+
+	public void setAadhaarNumber(String aadhaarNumber) {
+		this.aadhaarNumber = aadhaarNumber;
 	}
-	public int getGstNo() {
-		return gstNo;
+
+	public String getPanNumber() {
+		return panNumber;
 	}
-	public void setGstNo(int gstNo) {
-		this.gstNo = gstNo;
+
+	public void setPanNumber(String panNumber) {
+		this.panNumber = panNumber;
 	}
-	public String getRole() {
-		return role;
+
+	public String getGstNumber() {
+		return gstNumber;
 	}
-	public void setRole(String role) {
-		this.role = role;
+
+	public void setGstNumber(String gstNumber) {
+		this.gstNumber = gstNumber;
+	}
+
+	public int getRoleId() {
+		return roleId;
+	}
+
+	public void setRoleId(int roleId) {
+		this.roleId = roleId;
 	}
 	
+	public String getPassword() {
+		return password;
+	}
 
+	public void setPassword(String password) {
+		this.password = password;
+	}
 }

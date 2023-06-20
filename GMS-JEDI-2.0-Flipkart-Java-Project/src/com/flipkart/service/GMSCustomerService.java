@@ -1,6 +1,6 @@
 package com.flipkart.service;
 
-import com.flipkart.bean.Booking;
+import com.flipkart.bean.*;
 
 public class GMSCustomerService {
 	
@@ -24,8 +24,8 @@ public class GMSCustomerService {
 		return true;
 	}
 	
-	public Booking viewBookings(int custId) {
-		return new Booking();
-	}
+//	public Booking viewBookings(int custId) {
+//		return new Booking();
+//	}
 
 }

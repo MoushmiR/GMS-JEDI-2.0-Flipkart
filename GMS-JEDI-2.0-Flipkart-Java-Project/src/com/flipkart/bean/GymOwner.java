@@ -22,7 +22,6 @@ public class GymOwner {
 	private boolean approved;
 	private Gymnasium ownedGym[]; // To be made ArrayList
 	
-	
 	public boolean isApproved() {
 		return approved;
 	}

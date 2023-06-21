@@ -1,58 +1,124 @@
 package com.flipkart.client;
 
+import java.util.List;
 import java.util.Scanner;
+import com.flipkart.bean.*;
+import com.flipkart.service.GymOwnerGMSService;
+import com.flipkart.service.UserService;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class GymnasiumGMSMenu {
-	public static void GymOwnerRegistration(Scanner in) {
+	
+	
+//	List<User> users;
+	GymOwner gymOwner = new GymOwner();
+	GymOwnerGMSService gymOwnerService = new GymOwnerGMSService();
+	public void GymOwnerRegistration(Scanner in) {
+		Registration registration = new Registration();
+		
 		System.out.println("Enter your name: ");
-		String name=in.next();
+		gymOwner.setName(in.next());
+		
+		System.out.println("Enter your ID: ");
+		gymOwner.setOwnerId(in.next());
+		registration.setRegistrationId(gymOwner.getOwnerId());
+		
 		System.out.println("Enter your mobile: ");
-		String mobile=in.next();
+		gymOwner.setMobile(in.next());
+		registration.setMobile(gymOwner.getMobile());
+		
 		System.out.println("Enter your email: ");
-		String email=in.next();
+		gymOwner.setEmail(in.next());
+		registration.setEmail(gymOwner.getEmail());
+		
 		System.out.println("Enter your address: ");
-		String address=in.next();
+		gymOwner.setAddress(in.next());
+		registration.setAddress((gymOwner.getAddress()));
+		
 		System.out.println("Enter your dob: ");
-		String dob=in.next();
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+		String st = in.next();
+		gymOwner.setDob(LocalDate.parse(st, dtf));
+		registration.setDob(gymOwner.getDob());
+		
 		System.out.println("Enter your Aadhar number: ");
-		String aadhaarNumber=in.next();
+		gymOwner.setAadhaarNumber(in.next());
+		
 		System.out.println("Enter your PAN number: ");
-		String panNumber=in.next();
+		gymOwner.setPanNumber(in.next());
+		registration.setPanNumber(gymOwner.getPanNumber());
+		
 		System.out.println("Enter your GST number: ");
-		String gstNumber=in.next();
+		gymOwner.setGstNumber(in.next());
+		registration.setGstNumber(gymOwner.getGstNumber());
+		
 		System.out.println("Enter your username: ");
 		String username = in.next();
 		System.out.println("Enter your password: ");
 		String password = in.next();
+		
+		User user = new User(username,password,2);
+		
+		UserService userService =new UserService();
+		userService.registerGymOwner(registration);
+		userService.registerUser(user);
+//		System.out.println(gymOwner.getOwnerId());
+		GymOwnerActionPage(in);
 		System.out.flush();
 	}
 	
 
-	public static void GymRegistration(Scanner in) {
-		System.out.println("Add Personal Details:-");
-		System.out.print("Placeholder: ");
-		String username = in.next();
-		System.out.print("Placeholder: ");
-		String password = in.next();
+	public void GymRegistration(Scanner in) {
+		Gymnasium gymDetails = new Gymnasium(); 
+		System.out.println("Add gym Details:-");
+		System.out.print("Add gymnasium name: ");
+		gymDetails.setName(in.next());
+		System.out.print("Enter the number of equipments: ");
+		gymDetails.setNumItem(in.nextInt());
+		System.out.print("Enter gymnasium address: ");
+		gymDetails.setAddress(in.next());
+		System.out.print("Add gymnasium area in square foot: ");
+		gymDetails.setTotalArea(in.nextDouble());
+//		System.out.println(gymOwner.getOwnerId());
+		gymDetails.setOwnerId(gymOwner.getOwnerId());
+//		System.out.println(gymDetails);
+		
+		gymOwnerService.addGymDetails(gymDetails);
 		System.out.flush();
 	}
 
-	public static void GymOwnerActionPage(Scanner in) {
+	public void FetchGymDetails(Scanner in) {
+		System.out.println("Enter gym owner Id\n");
+//		GymOwnerGMSService gymOwnerService = new GymOwnerGMSService();
+		List<Gymnasium> gymDetails = gymOwnerService.fetchGymDetails(in.next());
+		for(Gymnasium gymnasium: gymDetails) {
+			System.out.println(gymnasium);
+		}
+	}
+	
+	public void GymOwnerActionPage(Scanner in) {
 
-		System.out.println("1.Add Gyms \n2.Exit");
-		System.out.print("Enter your choice: ");
-		int choice = in.nextInt();
-		switch (choice) {
-		// Case statements
-		case 1:
-			GymRegistration(in);
-			break;
-		case 2:
-			System.exit(0);
-			break;
-		// Default case statement
-		default:
-			System.out.println("incorrect choice");
+		System.out.println("1.Add Gyms \n2.View Gymnasiums\n3.Exit");
+		while(true) {
+			System.out.print("Enter your choice: ");
+			int choice = in.nextInt();
+			switch (choice) {
+			// Case statements
+			case 1:
+				GymRegistration(in);
+				break;
+			case 2:
+				FetchGymDetails(in);
+				break;
+			case 3:
+				System.exit(0);
+				break;
+			// Default case statement
+			default:
+				System.out.println("incorrect choice");
+			}
 		}
 
 	}

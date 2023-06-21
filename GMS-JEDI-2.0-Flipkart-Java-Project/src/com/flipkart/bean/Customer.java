@@ -8,7 +8,7 @@ import java.time.LocalDate;
  * 
  */
 public class Customer {
-	private String customerId;
+	private int customerId;
 	private String name;
 	private String mobile;
 	private String email;
@@ -18,12 +18,12 @@ public class Customer {
 	private String myBookingId[]; // To be made ArrayList
 	
 	
-	public String getCustomerId() {
+	public int getCustomerId() {
 		return customerId;
 	}
 	
-	public void setCustomerId(String customerId) {
-		this.customerId = customerId;
+	public void setCustomerId(int i) {
+		this.customerId = i;
 	}
 	
 	public String getName() {

@@ -9,7 +9,7 @@ import java.time.LocalDate;
  * 
  */
 public class Registration {
-	private String customerId;
+	private String registrationId;
 	private String name;
 	private String mobile;
 	private String email;
@@ -21,15 +21,14 @@ public class Registration {
 	private String gstNumber;
 	
 	private int roleId;
-	private String password;
 	
 
-	public String getCustomerId() {
-		return customerId;
+	public String getRegistrationId() {
+		return registrationId;
 	}
 
-	public void setCustomerId(String customerId) {
-		this.customerId = customerId;
+	public void setRegistrationId(String registrationId) {
+		this.registrationId = registrationId;
 	}
 
 	public String getName() {
@@ -102,13 +101,5 @@ public class Registration {
 
 	public void setRoleId(int roleId) {
 		this.roleId = roleId;
-	}
-	
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
 	}
 }

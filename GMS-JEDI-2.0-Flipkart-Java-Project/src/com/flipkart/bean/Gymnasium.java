@@ -14,9 +14,7 @@ public class Gymnasium {
 	private String address;
 	private double totalArea;
 	private int numItem;
-	
-	private Slots availableSlots[]; // To be made ArrayList
-	
+		
 	
 	public String getGymId() {
 		return gymId;
@@ -64,5 +62,9 @@ public class Gymnasium {
 
 	public void setOwnerId(String ownerId) {
 		this.ownerId = ownerId;
+	}
+	public String toString() {
+		return gymId + " " + ownerId + " " + name + " " + address + " " + totalArea + " " + numItem + " ";
+		
 	}
 }

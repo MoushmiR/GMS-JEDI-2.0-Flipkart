@@ -4,6 +4,9 @@
 package com.flipkart.client;
 import java.util.*;
 
+import com.flipkart.bean.User;
+import com.flipkart.service.UserService;
+
 /**
  * 
  */
@@ -23,122 +26,34 @@ public class GMSApplicationClient {
 		String username = in.next();
 		System.out.println("Enter your password: ");
 		String password = in.next();
+		System.out.print("Select Role:-\n1.Admin\n2.Customer\n3.Gym Onwer ");
+		int role = in.nextInt();
 		System.out.println("Welcome "+ username + "! You are logged in.");
+		User user = new User(username,password,role);
+		UserService authentication = new UserService();
+		if(authentication.authenticateUser(user)) {
+			System.out.println("Logged In");
+			switch(role) {
+			case 1: 
+				AdminGMSMenu Admin = new AdminGMSMenu();
+				Admin.AdminPage(in);
+			break;
+			case 2: 
+				CustomerGMSMenu Customer = new CustomerGMSMenu();
+				Customer.CustomerActionPage(in);
+			break;
+			case 3: 
+				GymnasiumGMSMenu Owner = new GymnasiumGMSMenu();
+				Owner.GymOwnerActionPage(in);
+				
+			break;
+			}
+		}else {
+			System.out.println("Invalid Credntials");
+		}
+		
 	}
 	
-	public static void BookGym(Scanner in) {
-
-		System.out.println("1.Slot1 \n2.Slot2\n3.Go Back\n4.Exit");
-		System.out.print("Enter your choice: ");
-		int choice = in.nextInt();
-		switch (choice) {
-		// Case statements
-		case 1:
-			System.out.println("Slot Booked");
-			break;
-		case 2:
-			System.out.println("Slot Full Please select another slot");
-			break;
-		case 3:
-			ViewCatalog(in);
-			break;
-		case 4:
-			System.exit(0);
-			break;
-		// Default case statement
-		default:
-			System.out.println("incorrect choice");
-		}
-
-	}
-	
-	public static void ViewCatalog(Scanner in) {
-		System.out.println("1.Gym1 \n2.Gym2\n3.Exit");
-		System.out.print("Enter your choice: ");
-		int choice = in.nextInt();
-		switch (choice) {
-		// Case statements
-		case 1:
-			BookGym(in);
-			break;
-		case 2:
-			BookGym(in);
-			break;
-		case 3:
-			System.exit(0);
-			break;
-		// Default case statement
-		default:
-			System.out.println("incorrect choice");
-		}
-
-	}
-	public static void CustomerActionPage() {
-		Scanner in = new Scanner(System.in);
-		System.out.println("1.View all the Gyms \n2.View all Slots\n3.Exit");
-		System.out.print("Enter your choice: ");
-		int choice = in.nextInt();
-		switch (choice) {
-		// Case statements
-		case 1:
-			ViewCatalog(in);
-			break;
-		case 2:
-			System.out.println("Viewing Booked Slots");
-			break;
-		case 3:
-			System.exit(0);
-			break;
-		// Default case statement
-		default:
-			System.out.println("incorrect choice");
-		}
-
-	}
-	public static void customerRegistration()
-	{
-		Scanner in = new Scanner(System.in);
-		System.out.println("Enter your name: ");
-		String name=in.next();
-		System.out.println("Enter your mobile: ");
-		String mobile=in.next();
-		System.out.println("Enter your email: ");
-		String email=in.next();
-		System.out.println("Enter your address: ");
-		String address=in.next();
-		System.out.println("Enter your dob: ");
-		String dob=in.next();
-		System.out.println("Enter your username: ");
-		String username = in.next();
-		System.out.println("Enter your password: ");
-		String password = in.next();
-		CustomerActionPage();
-	}
-	
-	public static void gymOwnerRegistration()
-	{
-		Scanner in = new Scanner(System.in);
-		System.out.println("Enter your name: ");
-		String name=in.next();
-		System.out.println("Enter your mobile: ");
-		String mobile=in.next();
-		System.out.println("Enter your email: ");
-		String email=in.next();
-		System.out.println("Enter your address: ");
-		String address=in.next();
-		System.out.println("Enter your dob: ");
-		String dob=in.next();
-		System.out.println("Enter your Aadhar number: ");
-		String aadhaarNumber=in.next();
-		System.out.println("Enter your PAN number: ");
-		String panNumber=in.next();
-		System.out.println("Enter your GST number: ");
-		String gstNumber=in.next();
-		System.out.println("Enter your username: ");
-		String username = in.next();
-		System.out.println("Enter your password: ");
-		String password = in.next();
-	}
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -158,10 +73,12 @@ public class GMSApplicationClient {
 			login();
 			break;
 		case 2:
-			customerRegistration();
+			CustomerGMSMenu Customer = new CustomerGMSMenu();
+			Customer.CustomerRegistration(in);
 			break;
 		case 3:
-			gymOwnerRegistration();
+			GymnasiumGMSMenu Owner = new GymnasiumGMSMenu();
+			Owner.GymOwnerRegistration(in);
 			break;
 		case 4:
 			System.out.println("Enter your current password");

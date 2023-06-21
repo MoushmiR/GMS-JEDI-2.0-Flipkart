@@ -16,7 +16,7 @@ public class Slots {
 	private LocalDate date;
 	private LocalTime time;
 	
-	private Customer guestBooked[]; // To be made ArrayList
+	private String guestId[]; // To be made ArrayList
 	
 	
 	public String getSlotId() {

@@ -16,7 +16,4 @@ public class GymOwnerService {
 		return new Gymnasium();
 	}
 	
-	public void publishGymDetails(Gymnasium gym) {
-		
-	}
 }

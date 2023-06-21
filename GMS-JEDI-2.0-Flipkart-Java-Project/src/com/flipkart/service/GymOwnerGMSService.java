@@ -13,10 +13,10 @@ public class GymOwnerGMSService implements GymOwnerGMSInterface{
 	List<GymOwner> gymOwners = new ArrayList<GymOwner>();
 	List<Gymnasium> gymnasiums = new ArrayList<Gymnasium>();;
 	
-	public GymOwner fetchOwnerDetails(String gymOwnerId) {
+	public GymOwner fetchOwnerDetails(String gymOwnerUserName) {
 		GymOwner gymOwnerDetails = null;
 		for(GymOwner gymOwner: gymOwners) {
-			if(gymOwner.getOwnerId().equals(gymOwnerId)) {
+			if(gymOwner.getOwnerUserName().equals(gymOwnerUserName)) {
 				gymOwnerDetails = gymOwner;
 			}
 		}
@@ -27,10 +27,10 @@ public class GymOwnerGMSService implements GymOwnerGMSInterface{
 		gymOwners.add(gymOwnerDetails);
 	}
 	
-	public List<Gymnasium> fetchGymDetails(String gymOwnerId) {
+	public List<Gymnasium> fetchGymDetails(String gymOwnerUserName) {
 		List<Gymnasium> gymnasiumDetails = new ArrayList<Gymnasium>();
 		for(Gymnasium gymDetails: gymnasiums) {
-			if(gymDetails.getOwnerId().equals(gymOwnerId)) {
+			if(gymDetails.getOwnerUserName().equals(gymOwnerUserName)) {
 				gymnasiumDetails.add(gymDetails);
 			}
 		}

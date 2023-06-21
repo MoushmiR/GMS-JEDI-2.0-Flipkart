@@ -22,8 +22,8 @@ public class GymnasiumGMSMenu {
 		gymOwner.setName(in.next());
 		
 		System.out.println("Enter your ID: ");
-		gymOwner.setOwnerId(in.next());
-		registration.setRegistrationId(gymOwner.getOwnerId());
+		gymOwner.setOwnerUserName(in.next());
+		registration.setUserName(gymOwner.getOwnerUserName());
 		
 		System.out.println("Enter your mobile: ");
 		gymOwner.setMobile(in.next());
@@ -82,7 +82,7 @@ public class GymnasiumGMSMenu {
 		System.out.print("Add gymnasium area in square foot: ");
 		gymDetails.setTotalArea(in.nextDouble());
 //		System.out.println(gymOwner.getOwnerId());
-		gymDetails.setOwnerId(gymOwner.getOwnerId());
+		gymDetails.setOwnerId(gymOwner.getOwnerUserName());
 //		System.out.println(gymDetails);
 		
 		gymOwnerService.addGymDetails(gymDetails);

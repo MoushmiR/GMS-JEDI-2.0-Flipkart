@@ -8,7 +8,7 @@ package com.flipkart.bean;
  */
 public class Gymnasium {
 	private String gymId;
-	private String ownerId;
+	private String ownerUserName;
 	
 	private String name;
 	private String address;
@@ -56,15 +56,15 @@ public class Gymnasium {
 		this.numItem = numItem;
 	}
 	
-	public String getOwnerId() {
-		return ownerId;
+	public String getOwnerUserName() {
+		return ownerUserName;
 	}
 
-	public void setOwnerId(String ownerId) {
-		this.ownerId = ownerId;
+	public void setOwnerId(String ownerUserName) {
+		this.ownerUserName = ownerUserName;
 	}
 	public String toString() {
-		return gymId + " " + ownerId + " " + name + " " + address + " " + totalArea + " " + numItem + " ";
+		return gymId + " " + ownerUserName + " " + name + " " + address + " " + totalArea + " " + numItem + " ";
 		
 	}
 }

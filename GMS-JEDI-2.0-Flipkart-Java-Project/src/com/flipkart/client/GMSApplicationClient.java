@@ -7,7 +7,7 @@ import java.util.*;
 /**
  * 
  */
-public class AppClient {
+public class GMSApplicationClient {
 
 	/**
 	 * @param args
@@ -75,7 +75,7 @@ public class AppClient {
 	}
 	public static void CustomerActionPage() {
 		Scanner in = new Scanner(System.in);
-		System.out.println("1.View Gyms \n2.View Slots\n3.Exit");
+		System.out.println("1.View all the Gyms \n2.View all Slots\n3.Exit");
 		System.out.print("Enter your choice: ");
 		int choice = in.nextInt();
 		switch (choice) {

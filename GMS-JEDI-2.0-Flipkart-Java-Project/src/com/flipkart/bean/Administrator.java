@@ -7,17 +7,17 @@ package com.flipkart.bean;
  * 
  */
 public class Administrator {
-	private String adminId;
+	private String userName;
 	private String name;
 	private String mobile;
 	
 	
 	public String getAdminId() {
-		return adminId;
+		return userName;
 	}
 	
-	public void setAdminId(String adminId) {
-		this.adminId = adminId;
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 	
 	public String getName() {

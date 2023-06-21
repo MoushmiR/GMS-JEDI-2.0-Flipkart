@@ -8,7 +8,7 @@ import java.time.LocalDate;
  * 
  */
 public class GymOwner {
-	private String ownerId;
+	private String ownerUserName;
 	private String name;
 	private String mobile;
 	private String email;
@@ -30,12 +30,12 @@ public class GymOwner {
 		this.approved = approved;
 	}
 
-	public String getOwnerId() {
-		return ownerId;
+	public String getOwnerUserName() {
+		return ownerUserName;
 	}
 	
-	public void setOwnerId(String ownerId) {
-		this.ownerId = ownerId;
+	public void setOwnerUserName(String ownerUserName) {
+		this.ownerUserName = ownerUserName;
 	}
 	
 	public String getName() {

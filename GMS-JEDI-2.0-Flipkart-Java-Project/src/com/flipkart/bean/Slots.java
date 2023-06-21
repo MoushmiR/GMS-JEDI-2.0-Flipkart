@@ -8,6 +8,7 @@ import java.time.LocalTime;
 /**
  * 
  */
+
 public class Slots {
 	private String slotId;
 	private String gymId;
@@ -16,7 +17,7 @@ public class Slots {
 	private LocalDate date;
 	private LocalTime time;
 	
-	private String guestId[]; // To be made ArrayList
+	private String guestUserName[]; // To be made ArrayList
 	
 	
 	public String getSlotId() {

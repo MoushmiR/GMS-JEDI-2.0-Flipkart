@@ -6,11 +6,11 @@ import com.flipkart.bean.Gymnasium;
 
 public interface GymOwnerGMSInterface {
 	
-	public GymOwner fetchOwnerDetails(String gymOwnerId);
+	public GymOwner fetchOwnerDetails(String gymOwnerUserName);
 	
 	public void addGymDetails(Gymnasium gymDetails);
 	
 	public void addGymOwnerDetails(GymOwner gymOwnerDetails);
 	
-	public List<Gymnasium> fetchGymDetails(String gymOwnerId);
+	public List<Gymnasium> fetchGymDetails(String gymOwnerUserName);
 }

@@ -7,7 +7,7 @@ import com.flipkart.bean.*;
 /**
  * 
  */
-public class GymOwnerService {
+public class GymOwnerGMSService implements GymOwnerGMSInterface {
 	public GymOwner fetchOwnerDetails() {
 		return new GymOwner();
 	}

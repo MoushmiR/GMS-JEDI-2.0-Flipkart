@@ -8,7 +8,7 @@ import java.time.LocalDate;
 /**
  * 
  */
-public class CustomerService { 
+public class CustomerGMSService implements CustomerGMSInterface { 
 	public Customer fetchCustomerDetails(String customerId) {
 		return new Customer();
 	}

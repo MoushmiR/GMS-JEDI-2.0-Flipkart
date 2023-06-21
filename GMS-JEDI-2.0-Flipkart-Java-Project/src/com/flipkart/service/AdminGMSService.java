@@ -8,7 +8,7 @@ import com.flipkart.bean.Gymnasium;
 /**
  * 
  */
-public class AdminService {
+public class AdminGMSService implements AdminGMSInterface {
 public void seePendingRequest() {
 		
 	}

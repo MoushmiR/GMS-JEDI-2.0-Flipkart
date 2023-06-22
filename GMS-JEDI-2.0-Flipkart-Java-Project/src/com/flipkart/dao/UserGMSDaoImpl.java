@@ -1,14 +1,32 @@
 package com.flipkart.dao;
-import com.flipkart.bean.Registration;
-import com.flipkart.bean.User;
+import com.flipkart.bean.*;
 
-public interface UserGMSDaoImpl {
+public class UserGMSDaoImpl implements UserGMSDao{
 	
-	public boolean isAuthenticated(User userData);
+	public boolean isAuthenticated(User userData) {
+		
+		
+		//database se interaction hogi yahan
+		
+		return true;
+	}
 	
-	public void registerCustomer(Registration customerData);
+	public void registerCustomer(Registration customerData) {
+		// todo
+		
+		return;
+	}
 	
-	public void registerGymOwner(Registration ownerData);
+	public void registerGymOwner(Registration ownerData) {
+		// todo
+		
+		return;
+	}
 	
-	public void registerUser(User userData);
+	public void registerUser(User userData) {
+		// todo
+		
+		return;
+	}
+	
 }

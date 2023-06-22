@@ -6,7 +6,7 @@ public interface UserGMSDao {
 	
 	public User isAuthenticated(User userData);
 	
-	public void registerCustomer(Registration customerData);
+	public void registerCustomer(Customer customerData);
 	
 	public void registerGymOwner(GymOwner ownerData);
 	

@@ -8,4 +8,5 @@ public class SQLConstants {
 	public static final String SQL_AUTH_QUERY= "SELECT * FROM User WHERE email = ? AND password = ?";
 	public static final String SQL_INSERT_GYMOWNER_DETAILS_QUERY = "insert into GymOwner values(?,?, ?, ?,?, ?, ?,?, ?)";
 	public static final String SQL_INSERT_USER_DETAILS_QUERY = "insert into User values(?,?,?)";
+	public static final String SQL_INSERT_CUSTOMER_DETAILS_QUERY = "insert into Customer values(?,?,?,?,?)";
 }

@@ -9,13 +9,13 @@ import com.flipkart.bean.Gymnasium;
 public class GymOwnerGMSDaoImpl implements GymOwnerGMSDao {
 	
 	public GymOwner fetchOwnerDetails(String gymOwnerId) {
-//		GymOwner gymOwnerDetails = null;
+		GymOwner gymOwnerDetails = null;
 //		for(GymOwner gymOwner: gymOwners) {
 //			if(gymOwner.getOwnerUserName().equals(gymOwnerUserName)) {
 //				gymOwnerDetails = gymOwner;
 //			}
 //		}
-//		return gymOwnerDetails;
+		return gymOwnerDetails;
 		
 		//todo
 		 
@@ -27,6 +27,8 @@ public class GymOwnerGMSDaoImpl implements GymOwnerGMSDao {
 	
 	public List<Gymnasium> fetchGymDetails(String gymOwnerId) {
 		// todo
+		 return new ArrayList<Gymnasium>();  
+		 
 	}
 	
 	public void addGymDetails(Gymnasium gymDetails) {

@@ -5,7 +5,7 @@ package com.flipkart.client;
 import java.util.*;
 
 import com.flipkart.bean.User;
-import com.flipkart.service.UserService;
+import com.flipkart.service.UserGMSService;
 
 /**
  * 
@@ -28,9 +28,8 @@ public class GMSApplicationClient {
 		String password = in.next();
 		System.out.print("Select Role:-\n1.Admin\n2.Customer\n3.Gym Onwer ");
 		int role = in.nextInt();
-		System.out.println("Welcome "+ username + "! You are logged in.");
 		User user = new User(username,password,role);
-		UserService authentication = new UserService();
+		UserGMSService authentication = new UserGMSService();
 		if(authentication.authenticateUser(user)) {
 			System.out.println("Logged In");
 			switch(role) {

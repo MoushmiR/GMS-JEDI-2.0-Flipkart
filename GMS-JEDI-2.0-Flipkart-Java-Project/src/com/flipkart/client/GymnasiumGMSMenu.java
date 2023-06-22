@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Scanner;
 import com.flipkart.bean.*;
 import com.flipkart.service.GymOwnerGMSService;
-import com.flipkart.service.UserService;
+import com.flipkart.service.UserGMSService;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -61,7 +61,7 @@ public class GymnasiumGMSMenu {
 		
 		User user = new User(username,password,2);
 		
-		UserService userService =new UserService();
+		UserGMSService userService =new UserGMSService();
 		userService.registerGymOwner(registration);
 		userService.registerUser(user);
 //		System.out.println(gymOwner.getOwnerId());

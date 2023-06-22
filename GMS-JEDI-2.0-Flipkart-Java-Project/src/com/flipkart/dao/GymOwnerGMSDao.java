@@ -12,6 +12,7 @@ public interface GymOwnerGMSDao {
 //	public void addGymOwnerDetails(GymOwner gymOwnerDetails);
 	
 	public List<Gymnasium> fetchGymDetails(String gymOwnerId);
+	public List<Gymnasium> fetchAllGymDetails();
 	
 	public void addGymDetails(Gymnasium gymDetails);
 }

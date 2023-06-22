@@ -45,6 +45,18 @@ public class GymOwnerGMSService implements GymOwnerGMSInterface{
 		return gymOwnerGMSDao.fetchGymDetails(gymOwnerId);
 	}
 	
+	public List<Gymnasium> fetchAllGymDetails() {
+//		List<Gymnasium> gymnasiumDetails = new ArrayList<Gymnasium>();
+//		for(Gymnasium gymDetails: gymnasiums) {
+//			if(gymDetails.getOwnerUserName().equals(gymOwnerUserName)) {
+//				gymnasiumDetails.add(gymDetails);
+//			}
+//		}
+//		return gymnasiumDetails;
+		
+		return gymOwnerGMSDao.fetchAllGymDetails();
+	}
+	
 	public void addGymDetails(Gymnasium gymDetails) {
 //		gymnasiums.add(gymDetails);
 		

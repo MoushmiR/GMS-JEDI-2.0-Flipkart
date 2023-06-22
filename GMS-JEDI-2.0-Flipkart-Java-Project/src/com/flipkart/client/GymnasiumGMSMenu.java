@@ -69,13 +69,13 @@ public class GymnasiumGMSMenu {
 		gymDetails.setAddress(in.next());
 		System.out.print("Add gymnasium area in square foot: ");
 		gymDetails.setTotalArea(in.nextDouble());
-		System.out.println("Enter the number of seats per slot: ");
-		gymDetails.setNumSeatsPerSlot(in.nextInt());
 //		System.out.println(gymOwner.getOwnerId());
 		gymDetails.setGymOwnerEmail(gymOwner.getEmail());
 //		System.out.println(gymDetails);
 		
 		gymOwnerService.addGymDetails(gymDetails);
+		
+		System.out.println("Select ");
 		System.out.flush();
 	}
 

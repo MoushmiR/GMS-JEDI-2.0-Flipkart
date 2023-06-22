@@ -89,6 +89,42 @@ public class GymOwnerGMSDaoImpl implements GymOwnerGMSDao {
 		return gymDetails;
 
 	}
+	
+public List<Gymnasium> fetchAllGymDetails() {
+		
+		List<Gymnasium> gymDetails = new ArrayList<Gymnasium>();
+
+
+		try {
+			conn = DBUtils.getConnection();
+			System.out.println("Fetching gym...");
+
+			stmt = conn.prepareStatement(SQLConstants.SQL_FETCH_ALL_GYM_DETAILS_QUERY);
+//			stmt.setString(1, gymOwnerId);
+
+			ResultSet rs = stmt.executeQuery();
+//			System.out.println("Gym Owner Email : " + gymOwnerId);
+			while (rs.next()) {
+				Gymnasium gym = new Gymnasium();
+				gym.setGymId(rs.getInt("gymId"));
+				gym.setGymOwnerEmail(rs.getString("gymOwnerEmail"));
+				gym.setName(rs.getString("name"));
+				gym.setAddress(rs.getString("address"));
+				gym.setNumItem(rs.getInt("numItem"));
+				gym.setTotalArea(rs.getDouble("totalArea"));
+				gymDetails.add(gym);
+			}
+
+		} catch (SQLException se) {
+			// Handle errors for JDBC
+			se.printStackTrace();
+		} catch (Exception e) {
+			// Handle errors for Class.forName
+			e.printStackTrace();
+		}
+		return gymDetails;
+
+	}
 
 	public void addGymDetails(Gymnasium gymDetails) {
 		try {
@@ -133,5 +169,7 @@ public class GymOwnerGMSDaoImpl implements GymOwnerGMSDao {
 		System.out.println("Added Gymnaisum");
 		return;
 	}
+
+
 
 }

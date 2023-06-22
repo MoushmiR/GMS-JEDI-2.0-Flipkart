@@ -13,4 +13,5 @@ public interface GymOwnerGMSInterface {
 //	public void addGymOwnerDetails(GymOwner gymOwnerDetails);
 	
 	public List<Gymnasium> fetchGymDetails(String gymOwnerUserName);
+	public List<Gymnasium> fetchAllGymDetails();
 }

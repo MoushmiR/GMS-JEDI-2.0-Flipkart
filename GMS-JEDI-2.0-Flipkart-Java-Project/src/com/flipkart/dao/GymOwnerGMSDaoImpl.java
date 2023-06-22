@@ -10,6 +10,7 @@ import java.util.List;
 
 import com.flipkart.bean.GymOwner;
 import com.flipkart.bean.Gymnasium;
+import com.flipkart.constants.SQLConstants;
 import com.flipkart.utils.DBUtils;
 
 public class GymOwnerGMSDaoImpl implements GymOwnerGMSDao {
@@ -22,9 +23,8 @@ public class GymOwnerGMSDaoImpl implements GymOwnerGMSDao {
 		try {
 			conn = DBUtils.getConnection();
 			System.out.println("Fetching gym...");
-			String sql = "select * from GymOwmer where email=?";
 
-			stmt = conn.prepareStatement(sql);
+			stmt = conn.prepareStatement(SQLConstants.SQL_FETCH_GYMOWNER_DETAILS_QUERY);
 			stmt.setString(1, gymOwnerEmail);
 
 			ResultSet rs = stmt.executeQuery();
@@ -62,9 +62,8 @@ public class GymOwnerGMSDaoImpl implements GymOwnerGMSDao {
 		try {
 			conn = DBUtils.getConnection();
 			System.out.println("Fetching gym...");
-			String sql = "select * from Gymnasium where gymOwnerEmail=?";
 
-			stmt = conn.prepareStatement(sql);
+			stmt = conn.prepareStatement(SQLConstants.SQL_FETCH_GYM_DETAILS_QUERY);
 			stmt.setString(1, gymOwnerId);
 
 			ResultSet rs = stmt.executeQuery();
@@ -101,11 +100,11 @@ public class GymOwnerGMSDaoImpl implements GymOwnerGMSDao {
 
 			// STEP 4: Execute a query
 			System.out.println("Creating statement...");
-			String sql = "insert into Gymnasium (gymOwnerEmail, name, address, totalArea, numItem) values(?, ?, ?, ?, ?)";
+			
 			// String sql = "UPDATE Employees set age=? WHERE id=?";
 			// String sql1="delete from employee where id=?";
 			// stmt.setInt(1, 101);
-			stmt = conn.prepareStatement(sql);
+			stmt = conn.prepareStatement(SQLConstants.SQL_INSERT_GYM_DETAILS_QUERY);
 
 			// Hard coded d
 			// Bind values into the parameters.

@@ -1,5 +1,6 @@
 package com.flipkart.dao;
 import com.flipkart.bean.*;
+import com.flipkart.constants.SQLConstants;
 import com.flipkart.utils.DBUtils;
 
 import java.sql.Connection;
@@ -25,10 +26,9 @@ public class UserGMSDaoImpl implements UserGMSDao{
 //			Class.forName("com.mysql.jdbc.Driver");
 //            conn = DriverManager.getConnection(DB_URL,USER,PASS);
 			conn = DBUtils.getConnection();
-            String sql = "SELECT * FROM User WHERE email = ? AND password = ?";
 
 
-            stmt = conn.prepareStatement(sql);
+            stmt = conn.prepareStatement(SQLConstants.SQL_AUTH_QUERY);
             stmt.setString(1, userData.getEmail());
             stmt.setString(2, userData.getPassword());
             ResultSet rs = stmt.executeQuery();
@@ -71,11 +71,10 @@ public class UserGMSDaoImpl implements UserGMSDao{
                
                   //STEP 4: Execute a query
                   System.out.println("Creating statement...");
-                  String sql="insert into GymOwner values(?,?, ?, ?,?, ?, ?,?, ?)";
                   //String sql = "UPDATE Employees set age=? WHERE id=?";
                  // String sql1="delete from employee where id=?";
                  // stmt.setInt(1, 101);
-                  stmt = conn.prepareStatement(sql);
+                  stmt = conn.prepareStatement(SQLConstants.SQL_INSERT_GYMOWNER_DETAILS_QUERY);
                
                   // Hard coded d
                   //Bind values into the parameters.
@@ -115,11 +114,10 @@ public class UserGMSDaoImpl implements UserGMSDao{
 			   
 			      //STEP 4: Execute a query
 			      System.out.println("Creating statement...");
-			      String sql="insert into User values(?,?,?)";
 			      //String sql = "UPDATE Employees set age=? WHERE id=?";
 			     // String sql1="delete from employee where id=?";
 			     // stmt.setInt(1, 101);
-			      stmt = conn.prepareStatement(sql);
+			      stmt = conn.prepareStatement(SQLConstants.SQL_INSERT_USER_DETAILS_QUERY);
 			   
 			      // Hard coded d
 			      //Bind values into the parameters.

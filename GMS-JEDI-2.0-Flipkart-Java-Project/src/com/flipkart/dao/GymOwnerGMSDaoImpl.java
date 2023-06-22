@@ -114,6 +114,8 @@ public class GymOwnerGMSDaoImpl implements GymOwnerGMSDao {
 			stmt.setString(3, gymDetails.getAddress());
 			stmt.setDouble(4, gymDetails.getTotalArea());
 			stmt.setInt(5, gymDetails.getNumItem());
+			stmt.setInt(6,gymDetails.getNumSeatsPerSlot());
+			stmt.setInt(7, 0);
 			stmt.executeUpdate();
 
 			// STEP 6: Clean-up environment

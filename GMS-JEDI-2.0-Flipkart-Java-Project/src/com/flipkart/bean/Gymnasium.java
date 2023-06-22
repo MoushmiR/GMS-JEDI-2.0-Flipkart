@@ -14,7 +14,25 @@ public class Gymnasium {
 	private String address;
 	private double totalArea;
 	private int numItem;
-		
+	private int numSeatsPerSlot;
+	private boolean isApproved;
+	
+	
+	public int getNumSeatsPerSlot() {
+		return numSeatsPerSlot;
+	}
+
+	public void setNumSeatsPerSlot(int numSeatsPerSlot) {
+		this.numSeatsPerSlot = numSeatsPerSlot;
+	}
+
+	public boolean isApproved() {
+		return isApproved;
+	}
+
+	public void setApproved(boolean isApproved) {
+		this.isApproved = isApproved;
+	}
 	
 	public int getGymId() {
 		return gymId;

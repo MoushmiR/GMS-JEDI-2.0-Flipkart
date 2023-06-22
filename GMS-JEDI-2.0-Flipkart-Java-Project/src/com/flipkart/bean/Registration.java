@@ -2,9 +2,6 @@
  * 
  */
 package com.flipkart.bean;
-
-import java.time.LocalDate;
-
 /**
  * 
  */

@@ -88,13 +88,26 @@ public class GymnasiumGMSMenu {
 		}
 	}
 	
+	public void AddSlots(Scanner in) {
+		System.out.println("Enter the gym id for which you want to add slots: ");
+		int gymId = in.nextInt();
+		System.out.println("Select which slots you want to add in space separated numbers: \n");
+		List<Slots> slotInfo = gymOwnerService.fetchPossibleSlots();
+		for(Slots slot: slotInfo) {
+			System.out.println(slot.getSlotId() + " " + slot.getSlotTime());
+		}
+		String chosenSlots = in.nextLine();
+		chosenSlots = in.nextLine();
+		gymOwnerService.addSlots(gymId,chosenSlots);
+	}
+	
 	public void GymOwnerActionPage(Scanner in, String email) {
 		
 			gymOwner.setEmail(email);
 		
-		System.out.println("1.Add Gyms \n2.View Gymnasiums\n3.Exit");
 		while(true) {
-			System.out.print("Enter your choice: ");
+			System.out.print("Enter your choice: \n");
+			System.out.println("1.Add Gyms \n2.View Gymnasiums\n3.Add Slots\n4.Exit");
 			int choice = in.nextInt();
 			switch (choice) {
 			// Case statements
@@ -105,7 +118,9 @@ public class GymnasiumGMSMenu {
 				FetchGymDetails(in);
 				break;
 			case 3:
-				System.exit(0);
+				AddSlots(in);
+				break;
+			case 4:
 				break;
 			// Default case statement
 			default:

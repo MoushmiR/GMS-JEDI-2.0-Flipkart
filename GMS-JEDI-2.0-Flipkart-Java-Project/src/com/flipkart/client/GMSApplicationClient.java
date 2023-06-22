@@ -33,16 +33,17 @@ public class GMSApplicationClient {
 			int role = user.getRoleId();
 			switch(role) {
 			case 1: 
-				AdminGMSMenu Admin = new AdminGMSMenu();
-				Admin.AdminPage(in);
+				CustomerGMSMenu Customer = new CustomerGMSMenu();
+				Customer.CustomerActionPage(in);
+				
 			break;
 			case 2:
 				GymnasiumGMSMenu Owner = new GymnasiumGMSMenu();
 				Owner.GymOwnerActionPage(in, user.getEmail());
 			break;
 			case 3: 
-				CustomerGMSMenu Customer = new CustomerGMSMenu();
-				Customer.CustomerActionPage(in);
+				AdminGMSMenu Admin = new AdminGMSMenu();
+				Admin.AdminPage(in);
 			break;
 			}
 		}else {

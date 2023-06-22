@@ -2,8 +2,6 @@
  * 
  */
 package com.flipkart.bean;
-import java.time.LocalDate;
-
 /**
  * 
  */
@@ -12,7 +10,7 @@ public class Customer {
 	private String name;
 	private String mobile;
 	private String address;
-	private LocalDate dob;
+	private String dob;
 	
 	public String getName() {
 		return name;
@@ -46,11 +44,11 @@ public class Customer {
 		this.address = address;
 	}
 	
-	public LocalDate getDob() {
+	public String getDob() {
 		return dob;
 	}
 	
-	public void setDob(LocalDate dob) {
+	public void setDob(String dob) {
 		this.dob = dob;
 	}
 }

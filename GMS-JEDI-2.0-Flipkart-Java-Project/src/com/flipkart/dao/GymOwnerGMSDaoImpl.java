@@ -10,6 +10,7 @@ import java.util.List;
 
 import com.flipkart.bean.GymOwner;
 import com.flipkart.bean.Gymnasium;
+import com.flipkart.bean.Slots;
 import com.flipkart.constants.SQLConstants;
 import com.flipkart.utils.DBUtils;
 
@@ -50,9 +51,55 @@ public class GymOwnerGMSDaoImpl implements GymOwnerGMSDao {
 
 	}
 
-//	public void addGymOwnerDetails(GymOwner gymOwnerDetails) {
-//		// todo
-//	}
+	public List<Slots> fetchPossibleSlots(){
+		List<Slots> allSlots = new ArrayList<Slots>();
+		try {
+			conn = DBUtils.getConnection();
+			System.out.println("Fetching all slots...");
+
+			stmt = conn.prepareStatement(SQLConstants.SQL_FETCH_ALL_SLOTS);
+
+			ResultSet rs = stmt.executeQuery();
+			
+			while (rs.next()) {
+				Slots slot = new Slots();
+				slot.setSlotId(rs.getString("slotId"));
+				slot.setSlotTime(rs.getString("startTime").substring(11,16));
+				allSlots.add(slot);
+			}
+
+		} catch (SQLException se) {
+			// Handle errors for JDBC
+			se.printStackTrace();
+		} catch (Exception e) {
+			// Handle errors for Class.forName
+			e.printStackTrace();
+		}
+		return allSlots;
+	}
+	
+	public void addSlots(int gymId, String chosenSlots) {
+		try{
+			conn = DBUtils.getConnection();
+	
+			stmt = conn.prepareStatement(SQLConstants.SQL_ALL_SLOTS);
+			stmt.setInt(1, gymId);
+		
+			for (int i = 0; i < chosenSlots.length(); i+=2) {
+				stmt.setString(2, String.valueOf(chosenSlots.charAt(i)));
+				stmt.executeUpdate();
+	        }
+			System.out.println("Slots added!");
+
+		} catch (SQLException se) {
+			// Handle errors for JDBC
+			se.printStackTrace();
+		} catch (Exception e) {
+			// Handle errors for Class.forName
+			e.printStackTrace();
+		}
+	}
+	
 
 	public List<Gymnasium> fetchGymDetails(String gymOwnerId) {
 		

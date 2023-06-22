@@ -34,7 +34,7 @@ public class GMSApplicationClient {
 			switch(role) {
 			case 1: 
 				CustomerGMSMenu Customer = new CustomerGMSMenu();
-				Customer.CustomerActionPage(in);
+				Customer.CustomerActionPage(in, user.getEmail());
 				
 			break;
 			case 2:

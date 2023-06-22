@@ -18,4 +18,5 @@ public class SQLConstants {
 	public static final String SQL_APPROVE_GYM_OWNER_BY_ID="Update GymOwner Set approved=1 WHERE email=?";
 	public static final String SQL_FETCH_ALL_SLOTS="SELECT * FROM Slots";
 	public static final String SQL_ALL_SLOTS="INSERT INTO GymSlots (gymId, slotId) values(?, ?)";
+	public static final String SQL_INSERT_CUSTOMER_DETAILS_QUERY="INSERT INTO Customer values(?, ?, ?, ?, ?)";
 }

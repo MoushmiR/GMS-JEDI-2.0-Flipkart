@@ -52,9 +52,45 @@ public class UserGMSDaoImpl implements UserGMSDao{
 		return userData.getRoleId()==0? null:userData;
 	}
 	
-	public void registerCustomer(Registration customerData) {
+	public void registerCustomer(Customer customerData) {
 		// todo
-		
+		try{
+            
+            
+
+            // Step 4 make/open  a connection 
+            
+               System.out.println("Connecting to database...");
+               conn = DBUtils.getConnection();
+            
+               //STEP 4: Execute a query
+               System.out.println("Creating statement...");
+               //String sql = "UPDATE Employees set age=? WHERE id=?";
+              // String sql1="delete from employee where id=?";
+              // stmt.setInt(1, 101);
+               stmt = conn.prepareStatement(SQLConstants.SQL_INSERT_CUSTOMER_DETAILS_QUERY);
+            
+               // Hard coded d
+               //Bind values into the parameters.
+               stmt.setString(1, customerData.getEmail());  // This would set age
+               stmt.setString(2, customerData.getName()); 
+               stmt.setString(3, customerData.getAddress()); 
+               stmt.setString(4, customerData.getMobile()); 
+               stmt.setString(5, customerData.getDob()); 
+               stmt.executeUpdate();
+                   
+               //STEP 6: Clean-up environment
+              // rs.close();
+               stmt.close();
+//               conn.close();
+            }catch(SQLException se){
+               //Handle errors for JDBC
+               se.printStackTrace();
+            }catch(Exception e){
+               //Handle errors for Class.forName
+               e.printStackTrace();
+            }
+            System.out.println("Added Customer details");
 		return;
 	}
 	
@@ -128,27 +164,12 @@ public class UserGMSDaoImpl implements UserGMSDao{
 			          
 			      //STEP 6: Clean-up environment
 			     // rs.close();
-			      stmt.close();
-			      conn.close();
 			   }catch(SQLException se){
 			      //Handle errors for JDBC
 			      se.printStackTrace();
 			   }catch(Exception e){
 			      //Handle errors for Class.forName
 			      e.printStackTrace();
-			   }finally{
-			      //finally block used to close resources
-			      try{
-			         if(stmt!=null)
-			            stmt.close();
-			      }catch(SQLException se2){
-			      }// nothing we can do
-			      try{
-			         if(conn!=null)
-			            conn.close();
-			      }catch(SQLException se){
-			         se.printStackTrace();
-			      }//end finally try
 			   }//end try
 //			   System.out.println("Added User Details");
 		return;

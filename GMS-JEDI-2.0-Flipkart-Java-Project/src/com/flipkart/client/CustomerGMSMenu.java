@@ -2,27 +2,38 @@ package com.flipkart.client;
 
 import java.util.Scanner;
 
+import com.flipkart.bean.*;
+import com.flipkart.service.*;
+
 public class CustomerGMSMenu {
-	public static void CustomerRegistration(Scanner in) {
+	
+	Customer customer = new Customer();
+	CustomerGMSService customerGMSService = new CustomerGMSService();
+	
+	public void CustomerRegistration(Scanner in) {
 		System.out.println("Enter your name: ");
-		String name=in.next();
+		customer.setName(in.next());
 		System.out.println("Enter your mobile: ");
-		String mobile=in.next();
+		customer.setMobile(in.next());
 		System.out.println("Enter your email: ");
-		String email=in.next();
+		customer.setEmail(in.next());
 		System.out.println("Enter your address: ");
-		String address=in.next();
+		customer.setAddress(in.next());
 		System.out.println("Enter your dob: ");
-		String dob=in.next();
-		System.out.println("Enter your username: ");
-		String username = in.next();
+		customer.setDob(in.next());
 		System.out.println("Enter your password: ");
 		String password = in.next();
-		CustomerActionPage(in);
+		User user = new User(customer.getEmail(),password,1);
+		UserGMSService userService = new UserGMSService();
+		userService.registerUser(user);
+		userService.registerCustomer(customer);
+		CustomerActionPage(in, customer.getEmail());
 	}
 
-	public static void CustomerActionPage(Scanner in) {
-		System.out.println("1.View Gyms \n2.View Slots\n3.Exit");
+	public void CustomerActionPage(Scanner in, String email) {
+		customer.setEmail(email);
+		
+		System.out.println("1.View Gyms \n2.View Current Bookings\n3.Exit");
 		System.out.print("Enter your choice: ");
 		int choice = in.nextInt();
 		switch (choice) {
@@ -43,7 +54,7 @@ public class CustomerGMSMenu {
 
 	}
 	
-	public static void ViewCatalog(Scanner in) {
+	public void ViewCatalog(Scanner in) {
 		System.out.println("1.Gym1 \n2.Gym2\n3.Exit");
 		System.out.print("Enter your choice: ");
 		int choice = in.nextInt();
@@ -65,7 +76,7 @@ public class CustomerGMSMenu {
 
 	}
 	
-	public static void BookGym(Scanner in) {
+	public void BookGym(Scanner in) {
 		System.out.println("1.Slot1 \n2.Slot2\n3.Go Back\n4.Exit");
 		System.out.print("Enter your choice: ");
 		int choice = in.nextInt();

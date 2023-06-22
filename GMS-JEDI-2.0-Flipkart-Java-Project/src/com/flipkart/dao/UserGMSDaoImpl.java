@@ -13,12 +13,9 @@ public class UserGMSDaoImpl implements UserGMSDao{
 	static final String DB_URL = "jdbc:mysql://localhost/Test";
 	static final String USER = "root";
 	static final String PASS = "Ayush@37";
-	 
+	Connection conn = null;
+	PreparedStatement stmt = null;
 	
-	public void fxn()
-	{
-		
-	}
 	public boolean isAuthenticated(User userData) {
 		
 		
@@ -41,12 +38,9 @@ public class UserGMSDaoImpl implements UserGMSDao{
 	
 	public void registerUser(User userData) {
 		// todo
-		Connection conn = null;
-		 PreparedStatement stmt = null;
-		 try{
-			   
 		
-			   
+		 try{
+			  
 			   Class.forName("com.mysql.jdbc.Driver");
 
 			   // Step 4 make/open  a connection 

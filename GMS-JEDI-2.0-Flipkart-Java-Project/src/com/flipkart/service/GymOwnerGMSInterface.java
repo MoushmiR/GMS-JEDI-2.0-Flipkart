@@ -10,7 +10,7 @@ public interface GymOwnerGMSInterface {
 	
 	public void addGymDetails(Gymnasium gymDetails);
 	
-	public void addGymOwnerDetails(GymOwner gymOwnerDetails);
+//	public void addGymOwnerDetails(GymOwner gymOwnerDetails);
 	
 	public List<Gymnasium> fetchGymDetails(String gymOwnerUserName);
 }

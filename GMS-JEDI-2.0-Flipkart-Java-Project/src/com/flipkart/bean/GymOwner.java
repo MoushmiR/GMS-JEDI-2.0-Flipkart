@@ -13,7 +13,7 @@ public class GymOwner {
 	private String mobile;
 	private String email;
 	private String address;
-	private LocalDate dob;
+	private String dob;
 	
 	private String aadhaarNumber;
 	private String panNumber;
@@ -70,12 +70,12 @@ public class GymOwner {
 		this.address = address;
 	}
 	
-	public LocalDate getDob() {
+	public String getDob() {
 		return dob;
 	}
 	
-	public void setDob(LocalDate dob) {
-		this.dob = dob;
+	public void setDob(String string) {
+		this.dob = string;
 	}
 	
 	public String getAadhaarNumber() {

@@ -27,11 +27,11 @@ public class GymOwnerGMSService implements GymOwnerGMSInterface{
 		return gymOwnerGMSDao.fetchOwnerDetails(gymOwnerId);
 	}
 	
-	public void addGymOwnerDetails(GymOwner gymOwnerDetails) {
-//		gymOwners.add(gymOwnerDetails);
-		
-		gymOwnerGMSDao.addGymOwnerDetails(gymOwnerDetails);
-	}
+//	public void addGymOwnerDetails(GymOwner gymOwnerDetails) {
+////		gymOwners.add(gymOwnerDetails);
+//		
+//		gymOwnerGMSDao.addGymOwnerDetails(gymOwnerDetails);
+//	}
 	
 	public List<Gymnasium> fetchGymDetails(String gymOwnerId) {
 //		List<Gymnasium> gymnasiumDetails = new ArrayList<Gymnasium>();

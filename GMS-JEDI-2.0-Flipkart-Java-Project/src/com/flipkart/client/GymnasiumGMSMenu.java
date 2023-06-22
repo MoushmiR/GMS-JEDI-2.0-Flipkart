@@ -38,10 +38,9 @@ public class GymnasiumGMSMenu {
 		registration.setAddress((gymOwner.getAddress()));
 		
 		System.out.println("Enter your dob: ");
-		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd.MM.yyyy");
-		String st = in.next();
-		gymOwner.setDob(LocalDate.parse(st, dtf));
-		registration.setDob(gymOwner.getDob());
+		
+		gymOwner.setDob(in.next());
+		registration.setDob(in.next());
 		
 		System.out.println("Enter your Aadhar number: ");
 		gymOwner.setAadhaarNumber(in.next());

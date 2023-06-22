@@ -14,7 +14,7 @@ public class Registration {
 	private String mobile;
 	private String email;
 	private String address;
-	private LocalDate dob;
+	private String dob;
 	
 	private String aadhaarNumber;
 	private String panNumber;
@@ -63,11 +63,11 @@ public class Registration {
 		this.address = address;
 	}
 
-	public LocalDate getDob() {
+	public String getDob() {
 		return dob;
 	}
 
-	public void setDob(LocalDate dob) {
+	public void setDob(String dob) {
 		this.dob = dob;
 	}
 

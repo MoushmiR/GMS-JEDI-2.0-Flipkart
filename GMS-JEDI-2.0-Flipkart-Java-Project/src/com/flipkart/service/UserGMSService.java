@@ -22,7 +22,7 @@ public class UserGMSService {
 //	List<Registration> registrationInfo = new ArrayList<Registration>();
 ////	List<User> userList = new ArrayList<User>();
 	
-	UserGMSDao userGMSDao;
+	UserGMSDao userGMSDao = new UserGMSDaoImpl();
 	public void registerCustomer(Registration customerData) {
 		userGMSDao.registerCustomer(customerData);
 ;	}

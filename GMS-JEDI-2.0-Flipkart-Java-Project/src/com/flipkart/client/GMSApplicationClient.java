@@ -24,31 +24,29 @@ public class GMSApplicationClient {
 		Scanner in = new Scanner(System.in);
 		System.out.println("Enter your username: ");
 		String username = in.next();
-		System.out.println("Enter your password: ");
+		System.out.println("Enter your correct password: ");
 		String password = in.next();
-		System.out.print("Select Role:-\n1.Admin\n2.Customer\n3.Gym Onwer ");
-		int role = in.nextInt();
-		User user = new User(username,password,role);
+		User user = new User(username,password,0);
 		UserGMSService authentication = new UserGMSService();
-		if(authentication.authenticateUser(user)) {
+		if(authentication.authenticateUser(user) != null) {
 			System.out.println("Logged In");
+			int role = user.getRoleId();
 			switch(role) {
 			case 1: 
 				AdminGMSMenu Admin = new AdminGMSMenu();
 				Admin.AdminPage(in);
 			break;
-			case 2: 
+			case 2:
+				GymnasiumGMSMenu Owner = new GymnasiumGMSMenu();
+				Owner.GymOwnerActionPage(in, user.getEmail());
+			break;
+			case 3: 
 				CustomerGMSMenu Customer = new CustomerGMSMenu();
 				Customer.CustomerActionPage(in);
 			break;
-			case 3: 
-				GymnasiumGMSMenu Owner = new GymnasiumGMSMenu();
-				Owner.GymOwnerActionPage(in);
-				
-			break;
 			}
 		}else {
-			System.out.println("Invalid Credntials");
+			System.out.println("Invalid Credentials");
 		}
 		
 	}

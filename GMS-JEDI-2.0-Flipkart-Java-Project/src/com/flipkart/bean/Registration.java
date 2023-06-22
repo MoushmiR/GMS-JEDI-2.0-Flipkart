@@ -9,97 +9,27 @@ import java.time.LocalDate;
  * 
  */
 public class Registration {
-	private String UserName;
-	private String name;
-	private String mobile;
 	private String email;
-	private String address;
-	private String dob;
-	
-	private String aadhaarNumber;
-	private String panNumber;
-	private String gstNumber;
-	
-	private int roleId;
-	
-	public String getUserName() {
-		return UserName;
-	}
-
-	public void setUserName(String userName) {
-		UserName = userName;
-	}
-
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getMobile() {
-		return mobile;
-	}
-
-	public void setMobile(String mobile) {
-		this.mobile = mobile;
-	}
-
+	private String dateOfCreation;
+	private String registrationId;
 	public String getEmail() {
 		return email;
 	}
-
 	public void setEmail(String email) {
 		this.email = email;
 	}
-
-	public String getAddress() {
-		return address;
+	public String getDateOfCreation() {
+		return dateOfCreation;
 	}
-
-	public void setAddress(String address) {
-		this.address = address;
+	public void setDateOfCreation(String dateOfCreation) {
+		this.dateOfCreation = dateOfCreation;
 	}
-
-	public String getDob() {
-		return dob;
+	public String getRegistrationId() {
+		return registrationId;
 	}
-
-	public void setDob(String dob) {
-		this.dob = dob;
+	public void setRegistrationId(String registrationId) {
+		this.registrationId = registrationId;
 	}
-
-	public String getAadhaarNumber() {
-		return aadhaarNumber;
-	}
-
-	public void setAadhaarNumber(String aadhaarNumber) {
-		this.aadhaarNumber = aadhaarNumber;
-	}
-
-	public String getPanNumber() {
-		return panNumber;
-	}
-
-	public void setPanNumber(String panNumber) {
-		this.panNumber = panNumber;
-	}
-
-	public String getGstNumber() {
-		return gstNumber;
-	}
-
-	public void setGstNumber(String gstNumber) {
-		this.gstNumber = gstNumber;
-	}
-
-	public int getRoleId() {
-		return roleId;
-	}
-
-	public void setRoleId(int roleId) {
-		this.roleId = roleId;
-	}
+	
+	
 }

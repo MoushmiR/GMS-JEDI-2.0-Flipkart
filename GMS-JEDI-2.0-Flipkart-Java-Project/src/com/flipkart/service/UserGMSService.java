@@ -27,12 +27,12 @@ public class UserGMSService {
 		userGMSDao.registerCustomer(customerData);
 ;	}
 	
-	public void registerGymOwner(Registration ownerData) {
+	public void registerGymOwner(GymOwner ownerData) {
 		
 		userGMSDao.registerGymOwner(ownerData);
 	}
 	
-	public boolean authenticateUser(User userData) {
+	public User authenticateUser(User userData) {
 		return userGMSDao.isAuthenticated(userData);
 	}
 	

@@ -8,10 +8,9 @@ import java.time.LocalDate;
  * 
  */
 public class GymOwner {
-	private String ownerUserName;
+	private String email;
 	private String name;
 	private String mobile;
-	private String email;
 	private String address;
 	private String dob;
 	
@@ -20,7 +19,6 @@ public class GymOwner {
 	private String gstNumber;
 	
 	private boolean approved;
-	private Gymnasium ownedGym[]; // To be made ArrayList
 	
 	public boolean isApproved() {
 		return approved;
@@ -28,14 +26,6 @@ public class GymOwner {
 
 	public void setApproved(boolean approved) {
 		this.approved = approved;
-	}
-
-	public String getOwnerUserName() {
-		return ownerUserName;
-	}
-	
-	public void setOwnerUserName(String ownerUserName) {
-		this.ownerUserName = ownerUserName;
 	}
 	
 	public String getName() {

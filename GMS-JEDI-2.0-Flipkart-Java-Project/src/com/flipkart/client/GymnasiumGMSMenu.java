@@ -15,56 +15,45 @@ public class GymnasiumGMSMenu {
 //	List<User> users;
 	GymOwner gymOwner = new GymOwner();
 	GymOwnerGMSService gymOwnerService = new GymOwnerGMSService();
+	
 	public void GymOwnerRegistration(Scanner in) {
 		Registration registration = new Registration();
-		
-		System.out.println("Enter your name: ");
-		gymOwner.setName(in.next());
-		
-		System.out.println("Enter your ID: ");
-		gymOwner.setOwnerUserName(in.next());
-		registration.setUserName(gymOwner.getOwnerUserName());
-		
-		System.out.println("Enter your mobile: ");
-		gymOwner.setMobile(in.next());
-		registration.setMobile(gymOwner.getMobile());
 		
 		System.out.println("Enter your email: ");
 		gymOwner.setEmail(in.next());
 		registration.setEmail(gymOwner.getEmail());
+	
+		System.out.println("Enter your name: ");
+		gymOwner.setName(in.next());
+		
+		System.out.println("Enter your mobile: ");
+		gymOwner.setMobile(in.next());
 		
 		System.out.println("Enter your address: ");
 		gymOwner.setAddress(in.next());
-		registration.setAddress((gymOwner.getAddress()));
 		
 		System.out.println("Enter your dob: ");
-		
 		gymOwner.setDob(in.next());
-		registration.setDob(in.next());
 		
 		System.out.println("Enter your Aadhar number: ");
 		gymOwner.setAadhaarNumber(in.next());
 		
 		System.out.println("Enter your PAN number: ");
 		gymOwner.setPanNumber(in.next());
-		registration.setPanNumber(gymOwner.getPanNumber());
 		
 		System.out.println("Enter your GST number: ");
 		gymOwner.setGstNumber(in.next());
-		registration.setGstNumber(gymOwner.getGstNumber());
 		
-		System.out.println("Enter your username: ");
-		String username = in.next();
 		System.out.println("Enter your password: ");
 		String password = in.next();
 		
-		User user = new User(username,password,2);
+		User user = new User(gymOwner.getEmail(),password,2);
 		
-		UserGMSService userService =new UserGMSService();
-		userService.registerGymOwner(registration);
+		UserGMSService userService = new UserGMSService();
 		userService.registerUser(user);
+		userService.registerGymOwner(gymOwner);
 //		System.out.println(gymOwner.getOwnerId());
-		GymOwnerActionPage(in);
+		GymOwnerActionPage(in, gymOwner.getEmail());
 		System.out.flush();
 	}
 	
@@ -81,7 +70,7 @@ public class GymnasiumGMSMenu {
 		System.out.print("Add gymnasium area in square foot: ");
 		gymDetails.setTotalArea(in.nextDouble());
 //		System.out.println(gymOwner.getOwnerId());
-		gymDetails.setOwnerId(gymOwner.getOwnerUserName());
+		gymDetails.setGymOwnerEmail(gymOwner.getEmail());
 //		System.out.println(gymDetails);
 		
 		gymOwnerService.addGymDetails(gymDetails);
@@ -89,16 +78,18 @@ public class GymnasiumGMSMenu {
 	}
 
 	public void FetchGymDetails(Scanner in) {
-		System.out.println("Enter gym owner Id\n");
 //		GymOwnerGMSService gymOwnerService = new GymOwnerGMSService();
-		List<Gymnasium> gymDetails = gymOwnerService.fetchGymDetails(in.next());
+		System.out.println("in fxn email: "+ gymOwner.getEmail());
+		List<Gymnasium> gymDetails = gymOwnerService.fetchGymDetails(gymOwner.getEmail());
 		for(Gymnasium gymnasium: gymDetails) {
 			System.out.println(gymnasium);
 		}
 	}
 	
-	public void GymOwnerActionPage(Scanner in) {
-
+	public void GymOwnerActionPage(Scanner in, String email) {
+		
+			gymOwner.setEmail(email);
+		
 		System.out.println("1.Add Gyms \n2.View Gymnasiums\n3.Exit");
 		while(true) {
 			System.out.print("Enter your choice: ");

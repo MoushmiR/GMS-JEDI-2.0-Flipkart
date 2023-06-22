@@ -7,25 +7,26 @@ package com.flipkart.bean;
  * 
  */
 public class User {
-	private String userName;
+	private String email;
 	private String password;
 	private int roleId;
 	
 	
-	public User (String userName,String password,int roleId) {
-		this.userName=userName;
+	public User (String email,String password,int roleId) {
+		this.email=email;
 		this.password=password;
 		this.roleId=roleId;
 	}
 	
-	public String getUserName() {
-		return userName;
-	}
 	
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public String getEmail() {
+		return email;
 	}
-	
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
 	public String getPassword() {
 		return password;
 	}

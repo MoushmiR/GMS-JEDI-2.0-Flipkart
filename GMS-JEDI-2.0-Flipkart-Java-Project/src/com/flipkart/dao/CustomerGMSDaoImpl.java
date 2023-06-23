@@ -20,11 +20,15 @@ public class CustomerGMSDaoImpl implements CustomerGMSDao {
 		
 		try {
 			conn = DBUtils.getConnection();
-		    stmt = conn.prepareStatement(SQLConstants.SQL_FETCH_ALL_GYMS);
+		    stmt = conn.prepareStatement(SQLConstants.SQL_FETCH_ALL_APPROVED_GYMS);
 	
 		    ResultSet output = stmt.executeQuery();
+		    System.out.println("Gym Id \t GymOwner \t   GymName");
 		    while(output.next()) {
-		    	System.out.println(output.getString(1) + " " + output.getString(2) + " " + output.getString(3));
+		    	System.out.printf("%-5s\t", output.getString(1) );
+				System.out.printf("%-5s\t",output.getString(2));
+				System.out.printf("%-5s\t", output.getString(3) );
+		    	System.out.println("");
 		    }
 	    } catch(SQLException sqlExcep) {
 		       System.out.println(sqlExcep);

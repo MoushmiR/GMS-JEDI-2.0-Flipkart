@@ -13,7 +13,7 @@ public interface GymOwnerGMSInterface {
 		
 	public List<Gymnasium> fetchGymDetails(String gymOwnerUserName);
 	
-	public void addSlots(int gymId, String chosenSlots);
+	public void addSlots(int gymId, String chosenSlots, List<Slots> slotInfo);
 	
 	public List<Slots> fetchPossibleSlots();
 }

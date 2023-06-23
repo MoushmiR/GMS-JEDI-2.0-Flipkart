@@ -103,7 +103,7 @@ public class GymnasiumGMSMenu {
 			System.out.println(slot.getSlotId() + " " + slot.getSlotTime());
 		}
 		String chosenSlots = in.next();
-		gymOwnerService.addSlots(gymId,chosenSlots);
+		gymOwnerService.addSlots(gymId,chosenSlots,slotInfo);
 	}
 	
 	public void GymOwnerActionPage(Scanner in, String email) {

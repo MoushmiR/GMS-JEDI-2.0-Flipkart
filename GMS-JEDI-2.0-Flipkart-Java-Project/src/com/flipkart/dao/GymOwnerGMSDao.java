@@ -16,5 +16,5 @@ public interface GymOwnerGMSDao {
 	
 	public List<Slots> fetchPossibleSlots();
 	
-	public void addSlots(int gymId, String chosenSlots);
+	public void addSlots(int gymId, String chosenSlots, List<Slots> slotInfo);
 }

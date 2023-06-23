@@ -100,7 +100,16 @@ public class GymOwnerGMSDaoImpl implements GymOwnerGMSDao {
 		return 0;
 	}
 	
-	public void addSlots(int gymId, String chosenSlots) {
+	public String findAppropriateSlot(String slotId, List<Slots> slotInfo) {
+		for(Slots slot : slotInfo) {
+			if(slot.getSlotId().equals(slotId)) {
+				return slot.getSlotTime();
+			}
+		}
+		return "";
+	}
+	
+	public void addSlots(int gymId, String chosenSlots, List<Slots> slotInfo) {
 		try{
 			conn = DBUtils.getConnection();
 	
@@ -110,7 +119,7 @@ public class GymOwnerGMSDaoImpl implements GymOwnerGMSDao {
 			for (int i = 0; i < chosenSlots.length(); i++) {
 				stmt.setString(1, String.valueOf(chosenSlots.charAt(i)));
 				stmt.setInt(2, 20);
-				stmt.setString(3, "06:00");
+				stmt.setString(3, findAppropriateSlot(chosenSlots.substring(i,i+1),slotInfo));
 				stmt.setInt(4, gymId);
 				stmt.executeUpdate();
 	        }

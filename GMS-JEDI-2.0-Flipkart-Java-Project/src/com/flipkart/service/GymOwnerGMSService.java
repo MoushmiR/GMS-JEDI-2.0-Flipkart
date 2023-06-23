@@ -24,8 +24,8 @@ public class GymOwnerGMSService implements GymOwnerGMSInterface{
 		return gymOwnerGMSDao.fetchPossibleSlots();
 	}
 	
-	public void addSlots(int gymId, String chosenSlots) {
-		gymOwnerGMSDao.addSlots(gymId,chosenSlots);
+	public void addSlots(int gymId, String chosenSlots, List<Slots> slotInfo) {
+		gymOwnerGMSDao.addSlots(gymId,chosenSlots,slotInfo);
 	}
 	
 	

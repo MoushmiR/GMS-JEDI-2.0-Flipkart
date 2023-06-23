@@ -178,6 +178,26 @@ public class CustomerGMSDaoImpl implements CustomerGMSDao {
 		return false;
 	}
 	
+	public boolean checkSlotExists(String slotId, int gymId) {
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		
+		try {
+			conn = DBUtils.getConnection();
+		    stmt = conn.prepareStatement(SQLConstants.SQL_CHECK_SLOT_QUERY);
+		    stmt.setString(1, slotId); 
+		    stmt.setInt(2, gymId);
+//		    stmt.setString(3, date);
+		    ResultSet output = stmt.executeQuery();
+		    if(output.next())
+		    	return true;
+		} catch(SQLException sqlExcep) {
+		       System.out.println(sqlExcep);
+		} catch(Exception excep) {
+		       excep.printStackTrace();
+		}
+		return false;
+	}
 	
 	
 }

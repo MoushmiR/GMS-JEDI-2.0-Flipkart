@@ -20,6 +20,7 @@ public interface CustomerGMSInterface {
 	
 //	public boolean bookSlot(String slotId,String customerId,String date);
 
+	public boolean checkSlotExists(String slotId, int gymId);
 	
 	public void fetchBookedSlots(String email);
 	

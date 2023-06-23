@@ -16,4 +16,6 @@ public interface CustomerGMSDao {
 
 	public void cancelBooking(String slotId, String email, String date);
 
+	public boolean checkSlotExists(String slotId, int gymId);
+
 }

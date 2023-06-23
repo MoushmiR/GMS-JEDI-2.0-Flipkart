@@ -42,6 +42,14 @@ public class CustomerGMSMenu {
 		System.out.print("Enter your Slot ID: ");
 		String slotId = in.next();
 		
+		boolean flag =customerGMSService.checkSlotExists(slotId, gymId);
+		if(flag ==false)
+		{
+			System.out.println("No slots found for this gym");
+			CustomerActionPage(in, email);
+			return;
+		}
+		
 		System.out.print("Enter your Date: ");
 		String date = in.next();
 		

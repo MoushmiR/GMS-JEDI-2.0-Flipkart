@@ -54,6 +54,11 @@ public class CustomerGMSService implements CustomerGMSInterface{
 		customerDao.fetchBookedSlots(email);
 	}
 
+	public boolean checkSlotExists(String slotId, int gymId) {
+		
+		return customerDao.checkSlotExists(slotId, gymId);
+	}
+
 
 
 

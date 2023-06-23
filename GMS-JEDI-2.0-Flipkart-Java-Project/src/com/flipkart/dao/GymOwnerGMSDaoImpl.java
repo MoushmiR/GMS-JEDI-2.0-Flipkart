@@ -78,15 +78,40 @@ public class GymOwnerGMSDaoImpl implements GymOwnerGMSDao {
 		return allSlots;
 	}
 	
+	public int findCapacity(int gymId) {
+		try{
+			conn = DBUtils.getConnection();
+	
+			stmt = conn.prepareStatement(SQLConstants.SQL_FIND_CAPACITY);
+			stmt.setInt(1, gymId);
+			ResultSet rs = stmt.executeQuery();
+			
+			if(rs.next()) {
+				return rs.getInt("numSeatsPerSlot");
+			}
+			
+		} catch (SQLException se) {
+			// Handle errors for JDBC
+			se.printStackTrace();
+		} catch (Exception e) {
+			// Handle errors for Class.forName
+			e.printStackTrace();
+		}
+		return 0;
+	}
+	
 	public void addSlots(int gymId, String chosenSlots) {
 		try{
 			conn = DBUtils.getConnection();
 	
 			stmt = conn.prepareStatement(SQLConstants.SQL_ALL_SLOTS);
-			stmt.setInt(1, gymId);
-		
-			for (int i = 0; i < chosenSlots.length(); i+=2) {
-				stmt.setString(2, String.valueOf(chosenSlots.charAt(i)));
+//			int slotCapacity = findCapacity(gymId);
+//			System.out.println(slotCapacity);
+			for (int i = 0; i < chosenSlots.length(); i++) {
+				stmt.setString(1, String.valueOf(chosenSlots.charAt(i)));
+				stmt.setInt(2, 20);
+				stmt.setString(3, "06:00");
+				stmt.setInt(4, gymId);
 				stmt.executeUpdate();
 	        }
 			System.out.println("Slots added!");

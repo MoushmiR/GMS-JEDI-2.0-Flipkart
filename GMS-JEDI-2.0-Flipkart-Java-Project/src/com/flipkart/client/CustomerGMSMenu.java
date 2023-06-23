@@ -29,75 +29,111 @@ public class CustomerGMSMenu {
 		userService.registerCustomer(customer);
 		CustomerActionPage(in, customer.getEmail());
 	}
+	
+	public void viewCatalog(Scanner in, String email) {
+		System.out.println("Welcome to FlipFit Gymnasium Application");
+		System.out.println("Menu:-");
+		customerGMSService.fetchGymList();
+		
+		System.out.print("Enter your Gym ID: ");
+		int gymId = in.nextInt();
+		
+		customerGMSService.fetchAvilableSlots(gymId);
+		System.out.print("Enter your Slot ID: ");
+		String slotId = in.next();
+		
+		System.out.print("Enter your Date: ");
+		String date = in.next();
+		
+		int response = customerGMSService.bookSlots(gymId, slotId, email, date);
+		switch (response) {
+			case 0:
+				System.out.println("This time is already booked\nCancelling that slot and booking that");
+				break;
+			case 1:
+				System.out.println("There are no more slots left");
+				break;
+			case 2:
+				System.out.println("Congratulations your slot is booked");
+				break;
+			// Default case statement
+			default:
+				System.out.println("Incorrect choice!!! Please try again!!!");
+		}
+	}
 
 	public void CustomerActionPage(Scanner in, String email) {
-		customer.setEmail(email);
+		int choice = 0;
 		
-		System.out.println("1.View Gyms \n2.View Current Bookings\n3.Exit");
-		System.out.print("Enter your choice: ");
-		int choice = in.nextInt();
-		switch (choice) {
-		// Case statements
-		case 1:
-			ViewCatalog(in);
-			break;
-		case 2:
-			System.out.println("Viewing Booked Slots");
-			break;
-		case 3:
-			System.exit(0);
-			break;
-		// Default case statement
-		default:
-			System.out.println("incorrect choice");
+		while(choice != 3) {
+			System.out.println("Welcome to FlipFit Gymnasium Application");
+			
+			System.out.println("Menu:-");
+			System.out.println("1.View Gyms \n2.View Booked Slots\n3.Exit");
+			System.out.print("Enter your choice: ");
+			choice = in.nextInt();
+			
+			switch (choice) {
+				case 1:
+					viewCatalog(in, email);
+					break;
+				case 2:
+					customerGMSService.fetchBookedSlots(email);
+					break;
+				case 3:
+					System.exit(0);
+					break;
+				default:
+					System.out.println("Incorrect choice!!! Please try again!!!");
+			}
 		}
 
 	}
 	
-	public void ViewCatalog(Scanner in) {
-		System.out.println("1.Gym1 \n2.Gym2\n3.Exit");
-		System.out.print("Enter your choice: ");
-		int choice = in.nextInt();
-		switch (choice) {
-		// Case statements
-		case 1:
-			BookGym(in);
-			break;
-		case 2:
-			BookGym(in);
-			break;
-		case 3:
-			System.exit(0);
-			break;
-		// Default case statement
-		default:
-			System.out.println("incorrect choice");
-		}
-
-	}
+//	public void ViewCatalog(Scanner in) {
+//		System.out.println("1.Gym1 \n2.Gym2\n3.Exit");
+//		System.out.print("Enter your choice: ");
+//		int choice = in.nextInt();
+//		switch (choice) {
+//		// Case statements
+//		case 1:
+//			BookGym(in);
+//			break;
+//		case 2:
+//			BookGym(in);
+//			break;
+//		case 3:
+//			System.exit(0);
+//			break;
+//		// Default case statement
+//		default:
+//			System.out.println("incorrect choice");
+//		}
+//
+//	}
 	
-	public void BookGym(Scanner in) {
-		System.out.println("1.Slot1 \n2.Slot2\n3.Go Back\n4.Exit");
-		System.out.print("Enter your choice: ");
-		int choice = in.nextInt();
-		switch (choice) {
-		// Case statements
-		case 1:
-			System.out.println("Slot Booked");
-			break;
-		case 2:
-			System.out.println("Slot Full Please select another slot");
-			break;
-		case 3:
-			ViewCatalog(in);
-			break;
-		case 4:
-			System.exit(0);
-			break;
-		// Default case statement
-		default:
-			System.out.println("incorrect choice");
-		}
-
-	}
+//	public void BookGym(Scanner in) {
+//		System.out.println("1.Slot1 \n2.Slot2\n3.Go Back\n4.Exit");
+//		System.out.print("Enter your choice: ");
+//		int choice = in.nextInt();
+//		switch (choice) {
+//		// Case statements
+//		case 1:
+//			System.out.println("Slot Booked");
+//			break;
+//		case 2:
+//			System.out.println("Slot Full Please select another slot");
+//			break;
+//		case 3:
+//			ViewCatalog(in);
+//			break;
+//		case 4:
+//			System.exit(0);
+//			break;
+//		// Default case statement
+//		default:
+//			System.out.println("incorrect choice");
+//		}
+//
+//	}
 }

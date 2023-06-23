@@ -81,10 +81,15 @@ public class GymnasiumGMSMenu {
 
 	public void FetchGymDetails(Scanner in) {
 //		GymOwnerGMSService gymOwnerService = new GymOwnerGMSService();
-		System.out.println("in fxn email: "+ gymOwner.getEmail());
+//		System.out.println("in fxn email: "+ gymOwner.getEmail());
 		List<Gymnasium> gymDetails = gymOwnerService.fetchGymDetails(gymOwner.getEmail());
-		for(Gymnasium gymnasium: gymDetails) {
-			System.out.println(gymnasium);
+		System.out.println("Gym Id \t Name \t Number of Equipments \t Total-Area \t Address");
+    	for(Gymnasium gym: gymDetails) {
+			System.out.printf("%-5s\t", gym.getGymId());
+			System.out.printf("%-8s\t", gym.getName());
+			System.out.printf("%-8s\t", gym.getNumItem());
+			System.out.printf("%-8s\t", gym.getTotalArea());
+			System.out.printf("%-8s\t", gym.getAddress());
 		}
 	}
 	
@@ -96,8 +101,7 @@ public class GymnasiumGMSMenu {
 		for(Slots slot: slotInfo) {
 			System.out.println(slot.getSlotId() + " " + slot.getSlotTime());
 		}
-		String chosenSlots = in.nextLine();
-		chosenSlots = in.nextLine();
+		String chosenSlots = in.next();
 		gymOwnerService.addSlots(gymId,chosenSlots);
 	}
 	

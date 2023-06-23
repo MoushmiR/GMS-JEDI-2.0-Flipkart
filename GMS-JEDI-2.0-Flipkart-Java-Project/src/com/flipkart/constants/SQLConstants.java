@@ -17,6 +17,12 @@ public class SQLConstants {
 	public static final String SQL_APPROVE_GYM_BY_ID="Update Gymnasium Set isApproved=1 WHERE gymId=?";
 	public static final String SQL_APPROVE_GYM_OWNER_BY_ID="Update GymOwner Set approved=1 WHERE email=?";
 	public static final String SQL_FETCH_ALL_SLOTS="SELECT * FROM Slots";
-	public static final String SQL_ALL_SLOTS="INSERT INTO GymSlots (gymId, slotId) values(?, ?)";
+	public static final String SQL_ALL_SLOTS="INSERT INTO SlotsNew values(?, ?, ?, ?)";
 	public static final String SQL_INSERT_CUSTOMER_DETAILS_QUERY="INSERT INTO Customer values(?, ?, ?, ?, ?)";
+	public static final String SQL_FETCH_GYM_SLOT_QUERY = "Select * From SlotsNew Where gymId=?";
+	public static final String SQL_FIND_CAPACITY="SELECT * FROM Gymnasium WHERE gymId=?";
+	public static final String SQL_COUNT_CURRENT_CAPACITY_QUERY = "Select Count(*) From BookedSlot Where slotId=? AND date=?";
+	public static final String SQL_CHECK_CAPACITY_QUERY = "Select * From SlotsNew Where slotId=?";
+	public static final String SQL_BOOK_SLOT_QUERY="INSERT INTO BookedSlot (slotId,gymId,customerEmail,date) values(?, ?, ?, ?)";
+	public static final String SQL_FETCH_BOOKED_SLOT_QUERY="Select * From BookedSlot where customerEmail = ?";
 }

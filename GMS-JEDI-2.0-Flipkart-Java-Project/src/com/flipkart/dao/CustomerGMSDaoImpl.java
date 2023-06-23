@@ -56,7 +56,6 @@ public class CustomerGMSDaoImpl implements CustomerGMSDao {
 	
 	public void bookSlots(int gymId, String slotId,String email,String date) {
 		System.out.println("Connecting to database...");
-		   
 		Connection conn = null;
 		PreparedStatement stmt = null;
 		   
@@ -121,13 +120,64 @@ public class CustomerGMSDaoImpl implements CustomerGMSDao {
 		    stmt.setString(1, email); 
 		    ResultSet output = stmt.executeQuery();
 		    while(output.next()) {
-		    	System.out.println("Booking id: " + output.getInt(1) + " Date:" + output.getString(5) );
+		    	System.out.println("Booking id: " + output.getInt(1) + " Date:" + output.getString(5) + " GymId:" + output.getString(3));
 		    }
 		} catch(SQLException sqlExcep) {
 		       System.out.println(sqlExcep);
 		} catch(Exception excep) {
 		       excep.printStackTrace();
 		}
-	    }
+    }
+	
+	
+	public void cancelBooking(String slotId, String email, String date) {
+	System.out.println("Connecting to database...");
+		
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		
+		try {
+			conn = DBUtils.getConnection();
+		    stmt = conn.prepareStatement(SQLConstants.SQL_CANCEL_BOOKED_SLOT_QUERY);
+		    stmt.setString(1, email); 
+		    stmt.setString(2, slotId);
+		    stmt.setString(3, date);
+		    stmt.executeUpdate();
+		
+		} catch(SQLException sqlExcep) {
+		       System.out.println(sqlExcep);
+		} catch(Exception excep) {
+		       excep.printStackTrace();
+		}
+//		return false;
+		
+		
+	}
+	
+	
+	public boolean alreadyBooked(String slotId, String email, String date) {
+	System.out.println("Connecting to database...");
+		
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		
+		try {
+			conn = DBUtils.getConnection();
+		    stmt = conn.prepareStatement(SQLConstants.SQL_ALREADY_BOOKED_SLOT_QUERY);
+		    stmt.setString(1, email); 
+		    stmt.setString(2, slotId);
+		    stmt.setString(3, date);
+		    ResultSet output = stmt.executeQuery();
+		    if(output.next())
+		    	return true;
+		} catch(SQLException sqlExcep) {
+		       System.out.println(sqlExcep);
+		} catch(Exception excep) {
+		       excep.printStackTrace();
+		}
+		return false;
+	}
+	
+	
 	
 }

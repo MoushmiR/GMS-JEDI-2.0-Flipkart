@@ -12,4 +12,8 @@ public interface CustomerGMSDao {
 	
 	public boolean isFull(String slotId,String date);
 
+	public boolean alreadyBooked(String slotId, String email, String date);
+
+	public void cancelBooking(String slotId, String email, String date);
+
 }

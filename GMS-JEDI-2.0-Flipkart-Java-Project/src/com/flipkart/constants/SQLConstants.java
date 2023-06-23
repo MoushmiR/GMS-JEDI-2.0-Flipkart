@@ -25,4 +25,6 @@ public class SQLConstants {
 	public static final String SQL_CHECK_CAPACITY_QUERY = "Select * From SlotsNew Where slotId=?";
 	public static final String SQL_BOOK_SLOT_QUERY="INSERT INTO BookedSlot (slotId,gymId,customerEmail,date) values(?, ?, ?, ?)";
 	public static final String SQL_FETCH_BOOKED_SLOT_QUERY="Select * From BookedSlot where customerEmail = ?";
+	public static final String SQL_ALREADY_BOOKED_SLOT_QUERY = "Select * from BookedSlot where customerEmail = ? and slotId = ? and date = ?";
+	public static final String SQL_CANCEL_BOOKED_SLOT_QUERY = "Delete from BookedSlot where customerEmail = ? and slotId = ? and date = ?";
 }

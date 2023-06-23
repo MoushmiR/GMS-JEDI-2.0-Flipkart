@@ -18,8 +18,10 @@ public interface CustomerGMSInterface {
 	
 	public boolean isFull(String slotId,String date);
 	
-	public boolean bookSlot(String slotId,String customerId,String date);
+//	public boolean bookSlot(String slotId,String customerId,String date);
 
 	
 	public void fetchBookedSlots(String email);
+	
+	
 }

@@ -23,8 +23,11 @@ public class CustomerGMSService implements CustomerGMSInterface{
 		customerDao.fetchSlotList(gymId);
 	}
 	
+	
 	public int bookSlots(int gymId, String slotId, String email,String date) {
 		if(alreadyBooked(slotId,email,date)) {
+			customerDao.cancelBooking(slotId, email, date);
+			customerDao.bookSlots(gymId, slotId, email, date);
 			return 0;
 		}else if(isFull(slotId,date)) {
 			return 1;
@@ -35,20 +38,23 @@ public class CustomerGMSService implements CustomerGMSInterface{
 	}
 	
 	public boolean alreadyBooked(String slotId,String email,String date) {
-		return false;
+		return customerDao.alreadyBooked(slotId, email, date);
+//		return false;
 	}
 	
 	public boolean isFull(String slotId,String date) {
 		return customerDao.isFull(slotId, date);
 	}
 	
-	public boolean bookSlot(String slotId,String email,String date) {
-		return true;
-	}
+//	public boolean bookSlot(String slotId,String email,String date) {
+//		return true;
+//	}
 	
 	public void fetchBookedSlots(String email) {
 		customerDao.fetchBookedSlots(email);
 	}
+
+
 
 
 }

@@ -48,7 +48,8 @@ public class CustomerGMSMenu {
 		int response = customerGMSService.bookSlots(gymId, slotId, email, date);
 		switch (response) {
 			case 0:
-				System.out.println("This time is already booked\nCancelling that slot and booking that");
+				System.out.println("This time is already booked\nCancelling that slot and booking new");
+				
 				break;
 			case 1:
 				System.out.println("There are no more slots left");

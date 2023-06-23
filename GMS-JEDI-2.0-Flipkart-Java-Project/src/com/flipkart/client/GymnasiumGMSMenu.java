@@ -91,6 +91,7 @@ public class GymnasiumGMSMenu {
 			System.out.printf("%-8s\t", gym.getTotalArea());
 			System.out.printf("%-8s\t", gym.getAddress());
 		}
+    	System.out.println("");
 	}
 	
 	public void AddSlots(Scanner in) {

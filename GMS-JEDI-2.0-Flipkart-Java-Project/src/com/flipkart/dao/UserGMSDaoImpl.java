@@ -36,7 +36,6 @@ public class UserGMSDaoImpl implements UserGMSDao{
             {
             	int roleId = rs.getInt("roleId");
             	userData.setRoleId(roleId);
-            	System.out.println("I am in");
             }
 			      stmt.close();
 //			      conn.close();
@@ -60,11 +59,11 @@ public class UserGMSDaoImpl implements UserGMSDao{
 
             // Step 4 make/open  a connection 
             
-               System.out.println("Connecting to database...");
+//               System.out.println("Connecting to database...");
                conn = DBUtils.getConnection();
             
                //STEP 4: Execute a query
-               System.out.println("Creating statement...");
+//               System.out.println("Creating statement...");
                //String sql = "UPDATE Employees set age=? WHERE id=?";
               // String sql1="delete from employee where id=?";
               // stmt.setInt(1, 101);
@@ -102,11 +101,11 @@ public class UserGMSDaoImpl implements UserGMSDao{
 
                // Step 4 make/open  a connection 
                
-                  System.out.println("Connecting to database...");
+//                  System.out.println("Connecting to database...");
                   conn = DBUtils.getConnection();
                
                   //STEP 4: Execute a query
-                  System.out.println("Creating statement...");
+//                  System.out.println("Creating statement...");
                   //String sql = "UPDATE Employees set age=? WHERE id=?";
                  // String sql1="delete from employee where id=?";
                  // stmt.setInt(1, 101);
@@ -145,11 +144,11 @@ public class UserGMSDaoImpl implements UserGMSDao{
 			  
 			   // Step 4 make/open  a connection 
 			   
-			      System.out.println("Connecting to database...");
+//			      System.out.println("Connecting to database...");
 			      conn = DBUtils.getConnection();
 			   
 			      //STEP 4: Execute a query
-			      System.out.println("Creating statement...");
+//			      System.out.println("Creating statement...");
 			      //String sql = "UPDATE Employees set age=? WHERE id=?";
 			     // String sql1="delete from employee where id=?";
 			     // stmt.setInt(1, 101);

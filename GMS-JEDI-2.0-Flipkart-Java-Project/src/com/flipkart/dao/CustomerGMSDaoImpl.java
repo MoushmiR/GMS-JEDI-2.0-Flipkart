@@ -13,7 +13,7 @@ import com.flipkart.utils.DBUtils;
 public class CustomerGMSDaoImpl implements CustomerGMSDao {
 	
 	public void fetchGymList() {
-		System.out.println("Connecting to database...");
+//		System.out.println("Connecting to database...");
 		
 		Connection conn = null;
 		PreparedStatement stmt = null;
@@ -23,13 +23,14 @@ public class CustomerGMSDaoImpl implements CustomerGMSDao {
 		    stmt = conn.prepareStatement(SQLConstants.SQL_FETCH_ALL_APPROVED_GYMS);
 	
 		    ResultSet output = stmt.executeQuery();
-		    System.out.println("Gym Id \t GymOwner \t   GymName");
+		    System.out.println("Gym Id \t  GymOwner \t       GymName");
 		    while(output.next()) {
 		    	System.out.printf("%-5s\t", output.getString(1) );
 				System.out.printf("%-5s\t",output.getString(2));
 				System.out.printf("%-5s\t", output.getString(3) );
 		    	System.out.println("");
 		    }
+		    System.out.println("*********************************************");
 	    } catch(SQLException sqlExcep) {
 		       System.out.println(sqlExcep);
 	    } catch(Exception excep) {
@@ -38,7 +39,7 @@ public class CustomerGMSDaoImpl implements CustomerGMSDao {
 	}
 	
 	public void fetchSlotList(int gymId) {
-		System.out.println("Connecting to database...");
+//		System.out.println("Connecting to database...");
 		
 		Connection conn = null;
 		PreparedStatement stmt = null;
@@ -48,9 +49,15 @@ public class CustomerGMSDaoImpl implements CustomerGMSDao {
 		    stmt = conn.prepareStatement(SQLConstants.SQL_FETCH_GYM_SLOT_QUERY);
 		    stmt.setInt(1, gymId); 
 		    ResultSet output = stmt.executeQuery();
+		    System.out.println("SlotId \t Capacity \t SlotTime \t GymId");
 		    while(output.next()) {
-		    	System.out.println(output.getString(1) + " " + output.getString(2) + " " + output.getString(3));
+		    	System.out.printf("%-8s\t", output.getString(1) );
+				System.out.printf("%-8s\t",output.getString(2));
+				System.out.printf("%-8s\t", output.getString(3) );
+				System.out.printf("%-8s\t", output.getString(4) );
+		    	System.out.println("");
 		    }
+		    System.out.println("*********************************************");
 	    } catch(SQLException sqlExcep) {
 		       System.out.println(sqlExcep);
 	    } catch(Exception excep) {
@@ -59,7 +66,7 @@ public class CustomerGMSDaoImpl implements CustomerGMSDao {
 	}
 	
 	public void bookSlots(int gymId, String slotId,String email,String date) {
-		System.out.println("Connecting to database...");
+//		System.out.println("Connecting to database...");
 		Connection conn = null;
 		PreparedStatement stmt = null;
 		   
@@ -84,7 +91,7 @@ public class CustomerGMSDaoImpl implements CustomerGMSDao {
 	}
 	
 	public boolean isFull(String slotId,String date) {
-		System.out.println("Connecting to database...");
+//		System.out.println("Connecting to database...");
 		Connection conn = null;
 		PreparedStatement stmt = null;
 		
@@ -113,7 +120,7 @@ public class CustomerGMSDaoImpl implements CustomerGMSDao {
 	public void fetchBookedSlots(String email) {
 
 		
-		System.out.println("Connecting to database...");
+//		System.out.println("Connecting to database...");
 		
 		Connection conn = null;
 		PreparedStatement stmt = null;
@@ -123,9 +130,14 @@ public class CustomerGMSDaoImpl implements CustomerGMSDao {
 		    stmt = conn.prepareStatement(SQLConstants.SQL_FETCH_BOOKED_SLOT_QUERY);
 		    stmt.setString(1, email); 
 		    ResultSet output = stmt.executeQuery();
+		    System.out.println("BookingId \t Date \t    GymId");
 		    while(output.next()) {
-		    	System.out.println("Booking id: " + output.getInt(1) + " Date:" + output.getString(5) + " GymId:" + output.getString(3));
+		    	System.out.printf("%-12s\t", output.getInt(1) );
+				System.out.printf("  %-7s\t",output.getString(2));
+				System.out.printf("%-8s\t", output.getString(3) );
+		    	System.out.println("");
 		    }
+		    System.out.println("*********************************************");
 		} catch(SQLException sqlExcep) {
 		       System.out.println(sqlExcep);
 		} catch(Exception excep) {
@@ -135,7 +147,7 @@ public class CustomerGMSDaoImpl implements CustomerGMSDao {
 	
 	
 	public void cancelBooking(String slotId, String email, String date) {
-	System.out.println("Connecting to database...");
+//	System.out.println("Connecting to database...");
 		
 		Connection conn = null;
 		PreparedStatement stmt = null;
@@ -160,7 +172,7 @@ public class CustomerGMSDaoImpl implements CustomerGMSDao {
 	
 	
 	public boolean alreadyBooked(String slotId, String email, String date) {
-	System.out.println("Connecting to database...");
+//	System.out.println("Connecting to database...");
 		
 		Connection conn = null;
 		PreparedStatement stmt = null;

@@ -27,19 +27,19 @@ public class CustomerGMSMenu {
 		UserGMSService userService = new UserGMSService();
 		userService.registerUser(user);
 		userService.registerCustomer(customer);
-		CustomerActionPage(in, customer.getEmail());
+//		CustomerActionPage(in, customer.getEmail());
 	}
 	
 	public void viewCatalog(Scanner in, String email) {
-		System.out.println("Welcome to FlipFit Gymnasium Application");
-		System.out.println("Menu:-");
+//		System.out.println("Welcome to FlipFit Gymnasium Application");
+//		System.out.println("Menu:-");
 		customerGMSService.fetchGymList();
 		
-		System.out.print("Enter your Gym ID: ");
+		System.out.print("Choose Gym ID: ");
 		int gymId = in.nextInt();
 		
 		customerGMSService.fetchAvilableSlots(gymId);
-		System.out.print("Enter your Slot ID: ");
+		System.out.print("Enter Slot ID for which you want to make booking: ");
 		String slotId = in.next();
 		
 		boolean flag =customerGMSService.checkSlotExists(slotId, gymId);
@@ -75,7 +75,7 @@ public class CustomerGMSMenu {
 		int choice = 0;
 		
 		while(choice != 3) {
-			System.out.println("Welcome to FlipFit Gymnasium Application");
+//			System.out.println("Welcome to FlipFit Gymnasium Application");
 			
 			System.out.println("Menu:-");
 			System.out.println("1.View Gyms \n2.View Booked Slots\n3.Exit");

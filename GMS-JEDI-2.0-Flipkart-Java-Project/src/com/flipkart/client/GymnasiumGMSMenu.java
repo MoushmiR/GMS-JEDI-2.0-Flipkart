@@ -3,6 +3,10 @@ package com.flipkart.client;
 import java.util.List;
 import java.util.Scanner;
 import com.flipkart.bean.*;
+import com.flipkart.exception.DataEntryException;
+import com.flipkart.exception.GymDetailsNotFoundException;
+import com.flipkart.exception.NoDataFoundException;
+import com.flipkart.exception.NoGymOwnerIdFoundException;
 import com.flipkart.service.GymOwnerGMSService;
 import com.flipkart.service.UserGMSService;
 
@@ -16,7 +20,7 @@ public class GymnasiumGMSMenu {
 	GymOwner gymOwner = new GymOwner();
 	GymOwnerGMSService gymOwnerService = new GymOwnerGMSService();
 	
-	public void GymOwnerRegistration(Scanner in) {
+	public void GymOwnerRegistration(Scanner in) throws Exception {
 		Registration registration = new Registration();
 		
 		System.out.println("Enter your email: ");
@@ -53,12 +57,12 @@ public class GymnasiumGMSMenu {
 		userService.registerUser(user);
 		userService.registerGymOwner(gymOwner);
 //		System.out.println(gymOwner.getOwnerId());
-		GymOwnerActionPage(in, gymOwner.getEmail());
+//		GymOwnerActionPage(in, gymOwner.getEmail());
 		System.out.flush();
 	}
 	
 
-	public void GymRegistration(Scanner in) {
+	public void GymRegistration(Scanner in) throws Exception {
 		Gymnasium gymDetails = new Gymnasium(); 
 		System.out.println("Add gym Details:-");
 		System.out.print("Add gymnasium name: ");
@@ -79,7 +83,7 @@ public class GymnasiumGMSMenu {
 		System.out.flush();
 	}
 
-	public void FetchGymDetails(Scanner in) {
+	public void FetchGymDetails(Scanner in) throws Exception {
 //		GymOwnerGMSService gymOwnerService = new GymOwnerGMSService();
 //		System.out.println("in fxn email: "+ gymOwner.getEmail());
 		List<Gymnasium> gymDetails = gymOwnerService.fetchGymDetails(gymOwner.getEmail());
@@ -90,11 +94,12 @@ public class GymnasiumGMSMenu {
 			System.out.printf("%-8s\t", gym.getNumItem());
 			System.out.printf("%-8s\t", gym.getTotalArea());
 			System.out.printf("%-8s\t", gym.getAddress());
+			System.out.println("");
 		}
     	System.out.println("");
 	}
 	
-	public void AddSlots(Scanner in) {
+	public void AddSlots(Scanner in) throws Exception {
 		System.out.println("Enter the gym id for which you want to add slots: ");
 		int gymId = in.nextInt();
 		System.out.println("Select which slots you want to add in space separated numbers: \n");
@@ -106,7 +111,7 @@ public class GymnasiumGMSMenu {
 		gymOwnerService.addSlots(gymId,chosenSlots,slotInfo);
 	}
 	
-	public void GymOwnerActionPage(Scanner in, String email) {
+	public void GymOwnerActionPage(Scanner in, String email) throws Exception {
 		
 			gymOwner.setEmail(email);
 		

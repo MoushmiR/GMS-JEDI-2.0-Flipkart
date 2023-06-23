@@ -14,12 +14,13 @@ public class GMSApplicationClient {
 
 	/**
 	 * @param args
+	 * @throws Exception 
 	 * 
 	 * 
 	 */
 	
 	
-	public static void login()
+	public static void login() throws Exception
 	{
 		Scanner in = new Scanner(System.in);
 		System.out.println("Enter your username: ");
@@ -29,7 +30,7 @@ public class GMSApplicationClient {
 		User user = new User(username,password,0);
 		UserGMSService authentication = new UserGMSService();
 		if(authentication.authenticateUser(user) != null) {
-			System.out.println("Logged In");
+			System.out.println("Welcome " + username + "! You are logged in.");
 			int role = user.getRoleId();
 			switch(role) {
 			case 1: 
@@ -48,20 +49,21 @@ public class GMSApplicationClient {
 			}
 		}else {
 			System.out.println("Invalid Credentials");
+			System.out.println("You need to re-login!!");
+			login();
 		}
 		
 	}
 	
 	
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception {
 		// TODO Auto-generated method stub
 		System.out.println("Welcome to FlipFit Gymnasium Application");
 		System.out.println("Menu:");
 		System.out.println("1. Login");
 		System.out.println("2. Customer Registration");
 		System.out.println("3. GymOwner Registration");
-		System.out.println("4. Update Password");
-		System.out.println("5. exit");
+		System.out.println("4. exit");
 		
 		Scanner in = new Scanner(System.in);
 		int choice =in.nextInt();
@@ -73,19 +75,16 @@ public class GMSApplicationClient {
 		case 2:
 			CustomerGMSMenu Customer = new CustomerGMSMenu();
 			Customer.CustomerRegistration(in);
+			System.out.println("Please Login");
+			login();
 			break;
 		case 3:
 			GymnasiumGMSMenu Owner = new GymnasiumGMSMenu();
 			Owner.GymOwnerRegistration(in);
+			System.out.println("Please Login");
+			login();
 			break;
 		case 4:
-			System.out.println("Enter your current password");
-			String currPassword = in.next();
-			System.out.println("Enter your new password");
-			String newPassword = in.next();
-			System.out.println("Your password has been updated successfully!");
-			break;
-		case 5:
 			System.out.println("Exiting.....");
 			System.exit(0);
 			break;

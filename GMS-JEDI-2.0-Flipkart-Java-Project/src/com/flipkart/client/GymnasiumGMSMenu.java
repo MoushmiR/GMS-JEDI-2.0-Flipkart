@@ -13,7 +13,7 @@ import com.flipkart.service.UserGMSService;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-
+ 
 public class GymnasiumGMSMenu {
 	
 	
@@ -109,6 +109,7 @@ public class GymnasiumGMSMenu {
     	System.out.println("**********************************");
 	}
 	
+	
 	public void AddSlots(Scanner in, String email) throws Exception {
 		FetchGymDetails(in);
 		System.out.println("Enter the gym id for which you want to add slots: ");
@@ -120,14 +121,25 @@ public class GymnasiumGMSMenu {
 			GymOwnerActionPage(in, email);
 			return;
 		}
-		System.out.println("Select which slots you want to add in space separated numbers: \n");
-		List<Slots> slotInfo = gymOwnerService.fetchPossibleSlots();
-		for(Slots slot: slotInfo) {
-			System.out.println(slot.getSlotId() + " " + slot.getSlotTime());
+		boolean slotAlreadyExists = gymOwnerService.checkIfAlreadyBooked(gymId);
+		if(slotAlreadyExists) {
+			System.out.println("You have already booked slot");
+			GymOwnerActionPage(in, email);
+			return;
 		}
-		String chosenSlots = in.next();
-		gymOwnerService.addSlots(gymId,chosenSlots,slotInfo);
+		else {
+			System.out.println("Select which slots you want to add in space separated numbers: \n");
+			List<Slots> slotInfo = gymOwnerService.fetchPossibleSlots();
+			for(Slots slot: slotInfo) {
+				System.out.println(slot.getSlotId() + " " + slot.getSlotTime());
+			}
+			String chosenSlots = in.next();
+			gymOwnerService.addSlots(gymId,chosenSlots,slotInfo);
+			GymOwnerActionPage(in, email);
+			return;
+		}
 	}
+	
 	
 	public void GymOwnerActionPage(Scanner in, String email) throws Exception {
 			boolean check = gymOwnerService.checkOwnerApproval(email);
@@ -154,7 +166,7 @@ public class GymnasiumGMSMenu {
 			case 3:
 				AddSlots(in, email);
 			case 4:
-				System.exit(0);
+				GMSApplicationClient.mainPage();
 				break;
 			// Default case statement
 			default:

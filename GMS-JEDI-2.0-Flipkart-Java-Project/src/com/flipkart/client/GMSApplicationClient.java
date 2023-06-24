@@ -95,6 +95,7 @@ public class GMSApplicationClient {
 			break;
 		default: 
 			System.out.println("Wrong choice");
+			mainPage();
 		}
 		
 	}

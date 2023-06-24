@@ -38,6 +38,10 @@ public class GymOwnerGMSService implements GymOwnerGMSInterface{
 	}
 	
 	
+	public boolean checkIfAlreadyBooked(int gymId) {
+		return gymOwnerGMSDao.checkIfAlreadyBooked(gymId);
+	}
+	
 	//allows gym owner to add a particular slot for their gym
 	public void addSlots(int gymId, String chosenSlots, List<Slots> slotInfo) {
 		gymOwnerGMSDao.addSlots(gymId,chosenSlots,slotInfo);

@@ -109,6 +109,28 @@ public class GymOwnerGMSDaoImpl implements GymOwnerGMSDao {
 		return "";
 	}
 	
+	
+	public boolean checkIfAlreadyBooked(int gymId) {
+		try{
+			conn = DBUtils.getConnection();
+	
+			stmt = conn.prepareStatement(SQLConstants.SQL_CHECK_SLOT_FOR_GYM);
+			stmt.setInt(1, gymId);
+			ResultSet rs = stmt.executeQuery();
+			
+			return rs.next();
+
+		} catch (SQLException se) {
+			// Handle errors for JDBC
+			se.printStackTrace();
+		} catch (Exception e) {
+			// Handle errors for Class.forName
+			e.printStackTrace();
+		}
+		return false;
+	}
+	
+	
 	public void addSlots(int gymId, String chosenSlots, List<Slots> slotInfo) {
 		try{
 			conn = DBUtils.getConnection();

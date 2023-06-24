@@ -37,15 +37,15 @@ public class UserGMSDaoImpl implements UserGMSDao{
             	int roleId = rs.getInt("roleId");
             	userData.setRoleId(roleId);
             }
-			      stmt.close();
+		      stmt.close();
 //			      conn.close();
-			   }catch(SQLException se){
-			      //Handle errors for JDBC
-			      se.printStackTrace();
-			   }catch(Exception e){
-			      //Handle errors for Class.forName
-			      e.printStackTrace();
-			   }
+		    }catch(SQLException se){
+		      //Handle errors for JDBC
+		      se.printStackTrace();
+		    }catch(Exception e){
+		      //Handle errors for Class.forName
+		      e.printStackTrace();
+		    }
 		//end try
 //		System.out.println("Authentication checked");
 		return userData.getRoleId()==0? null:userData;

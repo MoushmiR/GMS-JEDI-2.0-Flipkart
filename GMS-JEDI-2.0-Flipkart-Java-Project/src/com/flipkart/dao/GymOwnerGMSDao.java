@@ -21,4 +21,6 @@ public interface GymOwnerGMSDao {
 	public boolean checkOwnerApproval(String email);
 
 	public boolean checkGymApproval(int gymId);
+
+	public boolean checkIfAlreadyBooked(int gymId);
 }

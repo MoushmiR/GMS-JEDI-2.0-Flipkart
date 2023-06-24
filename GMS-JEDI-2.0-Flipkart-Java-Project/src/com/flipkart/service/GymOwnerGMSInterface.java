@@ -22,5 +22,8 @@ public interface GymOwnerGMSInterface {
 	public List<Slots> fetchPossibleSlots() throws NoDataFoundException;
 	
 	public boolean checkOwnerApproval(String email);
+	
 	public boolean checkGymApproval(int gymId);
+	
+	public boolean checkIfAlreadyBooked(int gymId);
 }

@@ -32,4 +32,5 @@ public class SQLConstants {
 	public static final String SQL_CANCEL_BOOKING = "Delete from BookedSlot where BookingId = ?";
 	public static final String SQL_CHECK_GYM_APPROVE = "Select * from Gymnasium where gymId=? and isApproved=1";
 	public static final String SQL_CHECK_OWNER_APPROVE = "Select * from GymOwner where email=? and approved=1";
+	public static final String SQL_CHECK_SLOT_FOR_GYM = "SELECT * FROM SlotsNew WHERE gymId=?";
 }

@@ -1,8 +1,12 @@
 package com.flipkart.dao;
 
+import java.util.List;
+
+import com.flipkart.bean.Gymnasium;
+
 public interface CustomerGMSDao {
 
-	public void fetchGymList();
+	public List<Gymnasium> fetchGymList();
 	
 	public void fetchSlotList(int gymId);
 	
@@ -17,5 +21,9 @@ public interface CustomerGMSDao {
 	public void cancelBooking(String slotId, String email, String date);
 
 	public boolean checkSlotExists(String slotId, int gymId);
+
+	public void cancelBookedSlots(String email, int bookingId);
+
+	public boolean checkGymApprove(int gymId);
 
 }

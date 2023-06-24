@@ -4,6 +4,9 @@
 package com.flipkart.service;
 import com.flipkart.bean.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
 import com.flipkart.dao.*;
 /**
  * 
@@ -18,9 +21,9 @@ public class CustomerGMSService implements CustomerGMSInterface{
 	
 	
 	//fetches all gyms list for the customer
-	public void fetchGymList() {
-		customerDao.fetchGymList();
-		return;
+	public List<Gymnasium> fetchGymList() {
+		List<Gymnasium> gymList =  customerDao.fetchGymList();
+		return gymList;
 	}
 	
 	
@@ -66,6 +69,19 @@ public class CustomerGMSService implements CustomerGMSInterface{
 	//checks if a slot is available
 	public boolean checkSlotExists(String slotId, int gymId) {	
 		return customerDao.checkSlotExists(slotId, gymId);
+	}
+
+
+	public void cancelBookedSlots(String email, int bookingId) {
+		customerDao.cancelBookedSlots(email, bookingId);
+		
+	}
+
+
+	public boolean checkGymApprove(int gymId) {
+		return customerDao.checkGymApprove(gymId);
+		// TODO Auto-generated method stub
+		
 	}
 
 }

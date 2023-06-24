@@ -30,8 +30,16 @@ public class Gymnasium {
 		return isApproved;
 	}
 
-	public void setApproved(boolean isApproved) {
-		this.isApproved = isApproved;
+	public void setApproved(int isApproved) {
+		if(isApproved == 1)
+		{
+			this.isApproved = true;
+		}
+		
+		else
+		{
+			this.isApproved = false;
+		}
 	}
 	
 	public int getGymId() {

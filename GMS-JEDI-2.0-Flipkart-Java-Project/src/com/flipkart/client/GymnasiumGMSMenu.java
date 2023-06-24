@@ -7,6 +7,7 @@ import com.flipkart.exception.DataEntryException;
 import com.flipkart.exception.GymDetailsNotFoundException;
 import com.flipkart.exception.NoDataFoundException;
 import com.flipkart.exception.NoGymOwnerIdFoundException;
+import com.flipkart.service.GymOwnerGMSInterface;
 import com.flipkart.service.GymOwnerGMSService;
 import com.flipkart.service.UserGMSService;
 
@@ -18,7 +19,7 @@ public class GymnasiumGMSMenu {
 	
 //	List<User> users;
 	GymOwner gymOwner = new GymOwner();
-	GymOwnerGMSService gymOwnerService = new GymOwnerGMSService();
+	GymOwnerGMSInterface gymOwnerService = new GymOwnerGMSService();
 	
 	public void GymOwnerRegistration(Scanner in) throws Exception {
 		Registration registration = new Registration();
@@ -80,6 +81,7 @@ public class GymnasiumGMSMenu {
 //		System.out.println(gymDetails);
 		
 		gymOwnerService.addGymDetails(gymDetails);
+		
 		System.out.flush();
 	}
 
@@ -87,21 +89,37 @@ public class GymnasiumGMSMenu {
 //		GymOwnerGMSService gymOwnerService = new GymOwnerGMSService();
 //		System.out.println("in fxn email: "+ gymOwner.getEmail());
 		List<Gymnasium> gymDetails = gymOwnerService.fetchGymDetails(gymOwner.getEmail());
-		System.out.println("Gym Id \t Name \t Number of Equipments \t Total-Area \t Address");
+		System.out.println("Gym Id \t Name \t Number of Equipments \tTotal-Area \tAddress \tApproved ");
     	for(Gymnasium gym: gymDetails) {
 			System.out.printf("%-5s\t", gym.getGymId());
 			System.out.printf("%-8s\t", gym.getName());
 			System.out.printf("%-8s\t", gym.getNumItem());
 			System.out.printf("%-8s\t", gym.getTotalArea());
 			System.out.printf("%-8s\t", gym.getAddress());
+			if(gym.isApproved())
+			{
+				System.out.printf("%-8s\t", "Yes");
+			}
+			else
+			{
+				System.out.printf("%-8s\t", "No");
+			}
 			System.out.println("");
 		}
-    	System.out.println("");
+    	System.out.println("**********************************");
 	}
 	
-	public void AddSlots(Scanner in) throws Exception {
+	public void AddSlots(Scanner in, String email) throws Exception {
+		FetchGymDetails(in);
 		System.out.println("Enter the gym id for which you want to add slots: ");
 		int gymId = in.nextInt();
+		boolean check = gymOwnerService.checkGymApproval(gymId);
+		if(check == false)
+		{
+			System.out.println("This gym has not been approved yet");
+			GymOwnerActionPage(in, email);
+			return;
+		}
 		System.out.println("Select which slots you want to add in space separated numbers: \n");
 		List<Slots> slotInfo = gymOwnerService.fetchPossibleSlots();
 		for(Slots slot: slotInfo) {
@@ -112,12 +130,18 @@ public class GymnasiumGMSMenu {
 	}
 	
 	public void GymOwnerActionPage(Scanner in, String email) throws Exception {
-		
+			boolean check = gymOwnerService.checkOwnerApproval(email);
+			if(check==false)
+			{
+				System.out.println("You have not been approved yet.");
+				System.out.println("Exiting....");
+				System.exit(0);
+			}
 			gymOwner.setEmail(email);
 		
 		while(true) {
 			System.out.print("Enter your choice: \n");
-			System.out.println("1.Add Gyms \n2.View Gymnasiums\n3.Add Slots\n4.Exit");
+			System.out.println("1.Add Gyms \n2.View Gymnasiums \n3.Add Slots \n4.Exit");
 			int choice = in.nextInt();
 			switch (choice) {
 			// Case statements
@@ -128,9 +152,9 @@ public class GymnasiumGMSMenu {
 				FetchGymDetails(in);
 				break;
 			case 3:
-				AddSlots(in);
-				break;
+				AddSlots(in, email);
 			case 4:
+				System.exit(0);
 				break;
 			// Default case statement
 			default:

@@ -30,9 +30,15 @@ public class AdminGMSDaoImpl implements AdminGMSDao{
 			ResultSet rs = stmt.executeQuery();
 			while(rs.next()) {
 				GymOwner gymOwner = new GymOwner();
-				gymOwner.setName(rs.getString("name"));
 				gymOwner.setEmail(rs.getString("email"));
+				gymOwner.setName(rs.getString("name"));
+				gymOwner.setMobile(rs.getString("mobile"));
+				gymOwner.setDob(rs.getString("dob"));
+				gymOwner.setAadhaarNumber(rs.getString("aadharNumber"));
+				gymOwner.setPanNumber(rs.getString("panNumber"));
+				gymOwner.setGstNumber(rs.getString("gstNumber"));
 				gymOwner.setAddress(rs.getString("address"));
+				gymOwner.setApproved(rs.getBoolean("approved"));
 				gymOwnerDetails.add(gymOwner);
 			}
 
@@ -60,9 +66,13 @@ public class AdminGMSDaoImpl implements AdminGMSDao{
 			ResultSet rs = stmt.executeQuery();
 			while(rs.next()) {
 				Gymnasium gym = new Gymnasium();
+				gym.setGymId(rs.getInt("gymId"));
+				gym.setGymOwnerEmail(rs.getString("gymOwnerEmail"));
 				gym.setName(rs.getString("name"));
 				gym.setAddress(rs.getString("address"));
+				gym.setNumItem(rs.getInt("numItem"));
 				gym.setTotalArea(rs.getDouble("totalArea"));
+				gym.setApproved(rs.getInt("isApproved"));
 				gymDetails.add(gym);
 			}
 
@@ -92,9 +102,15 @@ public class AdminGMSDaoImpl implements AdminGMSDao{
 			ResultSet rs = stmt.executeQuery();
 			while(rs.next()) {
 				GymOwner gymOwner = new GymOwner();
-				gymOwner.setName(rs.getString("name"));
 				gymOwner.setEmail(rs.getString("email"));
+				gymOwner.setName(rs.getString("name"));
+				gymOwner.setMobile(rs.getString("mobile"));
+				gymOwner.setDob(rs.getString("dob"));
+				gymOwner.setAadhaarNumber(rs.getString("aadharNumber"));
+				gymOwner.setPanNumber(rs.getString("panNumber"));
+				gymOwner.setGstNumber(rs.getString("gstNumber"));
 				gymOwner.setAddress(rs.getString("address"));
+				gymOwner.setApproved(rs.getBoolean("approved"));
 				gymOwnerDetails.add(gymOwner);
 			}
 
@@ -122,9 +138,13 @@ public class AdminGMSDaoImpl implements AdminGMSDao{
 			ResultSet rs = stmt.executeQuery();
 			while(rs.next()) {
 				Gymnasium gym = new Gymnasium();
+				gym.setGymId(rs.getInt("gymId"));
+				gym.setGymOwnerEmail(rs.getString("gymOwnerEmail"));
 				gym.setName(rs.getString("name"));
 				gym.setAddress(rs.getString("address"));
+				gym.setNumItem(rs.getInt("numItem"));
 				gym.setTotalArea(rs.getDouble("totalArea"));
+				gym.setApproved(rs.getInt("isApproved"));
 				gymDetails.add(gym);
 			}
 

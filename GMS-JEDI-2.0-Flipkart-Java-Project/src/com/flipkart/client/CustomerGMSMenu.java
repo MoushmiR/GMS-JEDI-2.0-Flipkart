@@ -1,5 +1,6 @@
 package com.flipkart.client;
-
+import com.flipkart.service.*;
+import java.util.List;
 import java.util.Scanner;
 
 import com.flipkart.bean.*;
@@ -8,7 +9,7 @@ import com.flipkart.service.*;
 public class CustomerGMSMenu {
 	
 	Customer customer = new Customer();
-	CustomerGMSService customerGMSService = new CustomerGMSService();
+	CustomerGMSInterface customerGMSService = new CustomerGMSService();
 	
 	public void CustomerRegistration(Scanner in) {
 		System.out.println("Enter your name: ");
@@ -33,11 +34,18 @@ public class CustomerGMSMenu {
 	public void viewCatalog(Scanner in, String email) {
 //		System.out.println("Welcome to FlipFit Gymnasium Application");
 //		System.out.println("Menu:-");
-		customerGMSService.fetchGymList();
+		fetchGymList();
 		
 		System.out.print("Choose Gym ID: ");
 		int gymId = in.nextInt();
+		boolean check = customerGMSService.checkGymApprove(gymId);
 		
+		if(check == false)
+		{
+			System.out.println("This gym has not been approved yet!");
+			viewCatalog(in, email);
+			return;
+		}
 		customerGMSService.fetchAvilableSlots(gymId);
 		System.out.print("Enter Slot ID for which you want to make booking: ");
 		String slotId = in.next();
@@ -70,15 +78,36 @@ public class CustomerGMSMenu {
 				System.out.println("Incorrect choice!!! Please try again!!!");
 		}
 	}
+	
+	public void fetchGymList() {
+		List<Gymnasium> gymDetails = customerGMSService.fetchGymList();
+		 System.out.println("Gym Id \t  GymOwner \t       GymName");
+    	for(Gymnasium gym: gymDetails) {
+    		System.out.printf("%-5s\t", gym.getGymId() );
+			System.out.printf("%-5s\t",gym.getGymOwnerEmail());
+			System.out.printf("%-5s\t", gym.getName() );
+	    	System.out.println("");
+		}
+    	System.out.println("**********************************");
+		
+	}
 
+	private void cancelBookedSlots(Scanner in, String email) {
+		customerGMSService.fetchBookedSlots(email);
+		System.out.print("Enter Booking ID that you want to cancel: ");
+		int bookingId =in.nextInt();
+		customerGMSService.cancelBookedSlots(email, bookingId);
+
+		
+	}
 	public void CustomerActionPage(Scanner in, String email) {
 		int choice = 0;
 		
-		while(choice != 3) {
+		while(choice != 4) {
 //			System.out.println("Welcome to FlipFit Gymnasium Application");
 			
 			System.out.println("Menu:-");
-			System.out.println("1.View Gyms \n2.View Booked Slots\n3.Exit");
+			System.out.println("1.View Gyms \n2.View Booked Slots \n3.Cancel Booked Slots \n4.Exit");
 			System.out.print("Enter your choice: ");
 			choice = in.nextInt();
 			
@@ -88,8 +117,10 @@ public class CustomerGMSMenu {
 					break;
 				case 2:
 					customerGMSService.fetchBookedSlots(email);
-					break;
 				case 3:
+					cancelBookedSlots(in, email);
+					break;
+				case 4:
 					System.exit(0);
 					break;
 				default:
@@ -98,6 +129,8 @@ public class CustomerGMSMenu {
 		}
 
 	}
+
+	
 	
 //	public void ViewCatalog(Scanner in) {
 //		System.out.println("1.Gym1 \n2.Gym2\n3.Exit");

@@ -47,7 +47,7 @@ public class UserGMSDaoImpl implements UserGMSDao{
 			      e.printStackTrace();
 			   }
 		//end try
-		System.out.println("Authentication checked");
+//		System.out.println("Authentication checked");
 		return userData.getRoleId()==0? null:userData;
 	}
 	

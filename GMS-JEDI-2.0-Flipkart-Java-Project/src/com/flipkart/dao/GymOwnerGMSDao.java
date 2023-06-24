@@ -17,4 +17,8 @@ public interface GymOwnerGMSDao {
 	public List<Slots> fetchPossibleSlots();
 	
 	public void addSlots(int gymId, String chosenSlots, List<Slots> slotInfo);
+
+	public boolean checkOwnerApproval(String email);
+
+	public boolean checkGymApproval(int gymId);
 }

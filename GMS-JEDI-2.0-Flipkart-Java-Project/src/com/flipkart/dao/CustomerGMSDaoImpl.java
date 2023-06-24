@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.flipkart.bean.Gymnasium;
@@ -12,8 +13,9 @@ import com.flipkart.utils.DBUtils;
 
 public class CustomerGMSDaoImpl implements CustomerGMSDao {
 	
-	public void fetchGymList() {
+	public List<Gymnasium> fetchGymList() {
 //		System.out.println("Connecting to database...");
+		List<Gymnasium> gymDetails = new ArrayList<Gymnasium>();
 		
 		Connection conn = null;
 		PreparedStatement stmt = null;
@@ -22,20 +24,33 @@ public class CustomerGMSDaoImpl implements CustomerGMSDao {
 			conn = DBUtils.getConnection();
 		    stmt = conn.prepareStatement(SQLConstants.SQL_FETCH_ALL_APPROVED_GYMS);
 	
-		    ResultSet output = stmt.executeQuery();
-		    System.out.println("Gym Id \t  GymOwner \t       GymName");
-		    while(output.next()) {
-		    	System.out.printf("%-5s\t", output.getString(1) );
-				System.out.printf("%-5s\t",output.getString(2));
-				System.out.printf("%-5s\t", output.getString(3) );
-		    	System.out.println("");
-		    }
-		    System.out.println("*********************************************");
+		    ResultSet rs = stmt.executeQuery();
+//		    System.out.println("Gym Id \t  GymOwner \t       GymName");
+//		    while(output.next()) {
+//		    	Gymnasium gym = new Gymnasium();
+		    	
+//		    	System.out.printf("%-5s\t", output.getString(1) );
+//				System.out.printf("%-5s\t",output.getString(2));
+//				System.out.printf("%-5s\t", output.getString(3) );
+//		    	System.out.println("");
+//		    }
+		    while (rs.next()) {
+				Gymnasium gym = new Gymnasium();
+				gym.setGymId(rs.getInt("gymId"));
+				gym.setGymOwnerEmail(rs.getString("gymOwnerEmail"));
+				gym.setName(rs.getString("name"));
+				gym.setAddress(rs.getString("address"));
+				gym.setNumItem(rs.getInt("numItem"));
+				gym.setTotalArea(rs.getDouble("totalArea"));
+				gymDetails.add(gym);
+			}
+//		    System.out.println("*********************************************");
 	    } catch(SQLException sqlExcep) {
 		       System.out.println(sqlExcep);
 	    } catch(Exception excep) {
 	           excep.printStackTrace();
 	    }
+		return gymDetails;
 	}
 	
 	public void fetchSlotList(int gymId) {
@@ -51,10 +66,10 @@ public class CustomerGMSDaoImpl implements CustomerGMSDao {
 		    ResultSet output = stmt.executeQuery();
 		    System.out.println("SlotId \t Capacity \t SlotTime \t GymId");
 		    while(output.next()) {
-		    	System.out.printf("%-8s\t", output.getString(1) );
-				System.out.printf("%-8s\t",output.getString(2));
-				System.out.printf("%-8s\t", output.getString(3) );
-				System.out.printf("%-8s\t", output.getString(4) );
+		    	System.out.printf("%-7s\t", output.getString(1) );
+				System.out.printf("  %-9s\t",output.getString(2));
+				System.out.printf("  %-9s\t", output.getString(3) );
+				System.out.printf("  %-9s\t", output.getString(4) );
 		    	System.out.println("");
 		    }
 		    System.out.println("*********************************************");
@@ -203,6 +218,46 @@ public class CustomerGMSDaoImpl implements CustomerGMSDao {
 		    stmt = conn.prepareStatement(SQLConstants.SQL_CHECK_SLOT_QUERY);
 		    stmt.setString(1, slotId); 
 		    stmt.setInt(2, gymId);
+//		    stmt.setString(3, date);
+		    ResultSet output = stmt.executeQuery();
+		    if(output.next())
+		    	return true;
+		} catch(SQLException sqlExcep) {
+		       System.out.println(sqlExcep);
+		} catch(Exception excep) {
+		       excep.printStackTrace();
+		}
+		return false;
+	}
+
+
+	public void cancelBookedSlots(String email, int bookingId) {
+		// TODO Auto-generated method stub
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		
+		try {
+			conn = DBUtils.getConnection();
+		    stmt = conn.prepareStatement(SQLConstants.SQL_CANCEL_BOOKING);
+		    stmt.setInt(1, bookingId); 
+		    stmt.executeUpdate();
+		} catch(SQLException sqlExcep) {
+		       System.out.println(sqlExcep);
+		} catch(Exception excep) {
+		       excep.printStackTrace();
+		}
+		
+	}
+
+	@Override
+	public boolean checkGymApprove(int gymId) {
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		
+		try {
+			conn = DBUtils.getConnection();
+		    stmt = conn.prepareStatement(SQLConstants.SQL_CHECK_GYM_APPROVE);
+		    stmt.setInt(1, gymId);
 //		    stmt.setString(3, date);
 		    ResultSet output = stmt.executeQuery();
 		    if(output.next())

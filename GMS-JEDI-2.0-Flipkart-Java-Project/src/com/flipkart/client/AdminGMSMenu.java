@@ -2,7 +2,7 @@
  * 
  */
 package com.flipkart.client;
-
+import com.flipkart.service.*;
 import java.util.Scanner;
 
 import com.flipkart.service.AdminGMSService;
@@ -14,7 +14,7 @@ import com.flipkart.bean.*;
  */
 public class AdminGMSMenu {
 	
-	AdminGMSService adminService = new AdminGMSService();
+	AdminGMSInterface adminService = new AdminGMSService();
 	
 	public void approveAllGymRequest() {
 		adminService.approveAllGymRequest();
@@ -45,41 +45,99 @@ public class AdminGMSMenu {
 		// TODO Auto-generated method stub
 		List<Gymnasium> gymDetails = adminService.seePendingGymRequest();
 		
-		for(Gymnasium gym: gymDetails) {
-			System.out.println(gym.getName() + " " + gym.getAddress() + " " + gym.getTotalArea());
-		}		
+		System.out.println("Gym Id \t Name \t Number of Equipments \tTotal-Area \tAddress \tApproved ");
+    	for(Gymnasium gym: gymDetails) {
+			System.out.printf("%-5s\t", gym.getGymId());
+			System.out.printf("%-8s\t", gym.getName());
+			System.out.printf("%-8s\t", gym.getNumItem());
+			System.out.printf("%-8s\t", gym.getTotalArea());
+			System.out.printf("%-8s\t", gym.getAddress());
+			if(gym.isApproved())
+			{
+				System.out.printf("%-8s\t", "Yes");
+			}
+			else
+			{
+				System.out.printf("%-8s\t", "No");
+			}
+			System.out.println("");
+		}
+    	System.out.println("**********************************");	
 	}
 
 	public void viewPendingGymOwnerRequests() {
 		// TODO Auto-generated method stub
 		List<GymOwner> gymOwnerDetails = adminService.seePendingGymOwnerRequest();
 		
-		for(GymOwner gymOwner: gymOwnerDetails) {
-			System.out.println(gymOwner.getName() + " " + gymOwner.getEmail() + " " + gymOwner.getAddress());
-		}		
+		System.out.println("Email \t\t\t Name \t\t AadhaarNumber \t GSTNumber \tApproved ");
+    	for(GymOwner owner: gymOwnerDetails) {
+			System.out.printf("%-5s\t", owner.getEmail());
+			System.out.printf("%-8s\t", owner.getName());
+			System.out.printf("%-8s\t", owner.getAadhaarNumber());
+			System.out.printf("%-8s\t", owner.getGstNumber());
+			if(owner.isApproved())
+			{
+				System.out.printf("%-8s\t", "Yes");
+			}
+			else
+			{
+				System.out.printf("%-8s\t", "No");
+			}
+			System.out.println("");
+		}
+    	System.out.println("**********************************");		
 	}
 
 	public void viewAllGyms() {
 		// TODO Auto-generated method stub
 		List<Gymnasium> gymDetails = adminService.seeAllGyms();
 		
-		for(Gymnasium gym: gymDetails) {
-			System.out.println(gym.getName() + " " + gym.getAddress() + " " + gym.getTotalArea());
-		}		
+		System.out.println("Gym Id \t Name \t Number of Equipments \tTotal-Area \tAddress \tApproved ");
+    	for(Gymnasium gym: gymDetails) {
+			System.out.printf("%-5s\t", gym.getGymId());
+			System.out.printf("%-8s\t", gym.getName());
+			System.out.printf("%-8s\t", gym.getNumItem());
+			System.out.printf("%-8s\t", gym.getTotalArea());
+			System.out.printf("%-8s\t", gym.getAddress());
+			if(gym.isApproved())
+			{
+				System.out.printf("%-8s\t", "Yes");
+			}
+			else
+			{
+				System.out.printf("%-8s\t", "No");
+			}
+			System.out.println("");
+		}
+    	System.out.println("**********************************");	
 	}
 
 	public void viewAllGymOwners() {
 		
 		List<GymOwner> gymOwnerDetails = adminService.seeAllGymOwner();
 		
-		for(GymOwner gymOwner: gymOwnerDetails) {
-			System.out.println(gymOwner.getName() + " " + gymOwner.getEmail() + " " + gymOwner.getAddress());
-		}		
+		System.out.println("Email \t\t\t Name \t\t AadhaarNumber \t GSTNumber \tApproved ");
+    	for(GymOwner owner: gymOwnerDetails) {
+			System.out.printf("%-5s\t", owner.getEmail());
+			System.out.printf("%-8s\t", owner.getName());
+			System.out.printf("%-8s\t", owner.getAadhaarNumber());
+			System.out.printf("%-8s\t", owner.getGstNumber());
+			if(owner.isApproved())
+			{
+				System.out.printf("%-8s\t", "Yes");
+			}
+			else
+			{
+				System.out.printf("%-8s\t", "No");
+			}
+			System.out.println("");
+		}
+    	System.out.println("**********************************");		
 	}
 	
 	public void AdminPage(Scanner in) {
 		while(true) {
-			System.out.println("++++++++++++++++++++++++++++++++++++++++++++++");
+//			System.out.println("++++++++++++++++++++++++++++++++++++++++++++++");
 			System.out.println("1. View All Gym Owners");
 			System.out.println("2. View All Gyms");
 			System.out.println("3. View Pending Gym Owner Requests");

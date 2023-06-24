@@ -1,14 +1,16 @@
 package com.flipkart.service;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import com.flipkart.bean.Customer;
+import com.flipkart.bean.Gymnasium;
 import com.flipkart.bean.Slots;
 
 public interface CustomerGMSInterface {
 	public Customer fetchCustomerDetails(String customerId);
 	
-	public void fetchGymList();
+	public List<Gymnasium> fetchGymList();
 	
 	public void fetchAvilableSlots(int gymId);
 	
@@ -23,6 +25,9 @@ public interface CustomerGMSInterface {
 	public boolean checkSlotExists(String slotId, int gymId);
 	
 	public void fetchBookedSlots(String email);
+	public void cancelBookedSlots(String email, int bookingId);
+	
+	public boolean checkGymApprove(int gymId);
 	
 	
 }

@@ -61,8 +61,7 @@ public class GMSApplicationClient {
 		
 	}
 	
-	
-	public static void main(String[] args) throws Exception {
+	public static void mainPage() throws Exception {
 		// TODO Auto-generated method stub
 		System.out.println("Welcome to FlipFit Gymnasium Application");
 		System.out.println("Menu:");
@@ -97,7 +96,15 @@ public class GMSApplicationClient {
 		default: 
 			System.out.println("Wrong choice");
 		}
+		
 	}
+	public static void main(String[] args) throws Exception {
+		// TODO Auto-generated method stub
+		mainPage();
+	}
+
+
+	
 
 
 

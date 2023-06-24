@@ -73,4 +73,13 @@ public class GymOwnerGMSService implements GymOwnerGMSInterface{
             throw new DataEntryException();
         }
     }
+
+
+	public boolean checkOwnerApproval(String email) {
+		return gymOwnerGMSDao.checkOwnerApproval(email);
+	}
+	
+	public boolean checkGymApproval(int gymId) {
+		return gymOwnerGMSDao.checkGymApproval(gymId);
+	}
 }

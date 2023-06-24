@@ -33,7 +33,7 @@ public class GymOwnerGMSDaoImpl implements GymOwnerGMSDao {
 			gymOwnerDetails.setName(rs.getString("name"));
 			gymOwnerDetails.setMobile(rs.getString("mobile"));
 			gymOwnerDetails.setDob(rs.getString("dob"));
-			gymOwnerDetails.setAadhaarNumber(rs.getString("aadhaarNumber"));
+			gymOwnerDetails.setAadhaarNumber(rs.getString("aadharNumber"));
 			gymOwnerDetails.setPanNumber(rs.getString("panNumber"));
 			gymOwnerDetails.setGstNumber(rs.getString("gstNumber"));
 			gymOwnerDetails.setAddress(rs.getString("address"));
@@ -157,6 +157,7 @@ public class GymOwnerGMSDaoImpl implements GymOwnerGMSDao {
 				gym.setAddress(rs.getString("address"));
 				gym.setNumItem(rs.getInt("numItem"));
 				gym.setTotalArea(rs.getDouble("totalArea"));
+				gym.setApproved(rs.getInt("isApproved"));
 				gymDetails.add(gym);
 			}
 
@@ -176,11 +177,11 @@ public class GymOwnerGMSDaoImpl implements GymOwnerGMSDao {
 
 			// Step 4 make/open a connection
 
-			System.out.println("Connecting to database...");
+//			System.out.println("Connecting to database...");
 			conn = DBUtils.getConnection();
 
 			// STEP 4: Execute a query
-			System.out.println("Creating statement...");
+//			System.out.println("Creating statement...");
 			
 			// String sql = "UPDATE Employees set age=? WHERE id=?";
 			// String sql1="delete from employee where id=?";
@@ -211,8 +212,50 @@ public class GymOwnerGMSDaoImpl implements GymOwnerGMSDao {
 			e.printStackTrace();
 		// end finally try
 		} // end try
-		System.out.println("Added Gymnaisum");
+//		System.out.println("Added Gymnaisum");
 		return;
+	}
+
+	@Override
+	public boolean checkOwnerApproval(String email) {
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		
+		try {
+			conn = DBUtils.getConnection();
+		    stmt = conn.prepareStatement(SQLConstants.SQL_CHECK_OWNER_APPROVE);
+		    stmt.setString(1, email);
+//		    stmt.setString(3, date);
+		    ResultSet output = stmt.executeQuery();
+		    if(output.next())
+		    	return true;
+		} catch(SQLException sqlExcep) {
+		       System.out.println(sqlExcep);
+		} catch(Exception excep) {
+		       excep.printStackTrace();
+		}
+		return false;
+	}
+
+	@Override
+	public boolean checkGymApproval(int gymId) {
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		
+		try {
+			conn = DBUtils.getConnection();
+		    stmt = conn.prepareStatement(SQLConstants.SQL_CHECK_GYM_APPROVE);
+		    stmt.setInt(1, gymId);
+//		    stmt.setString(3, date);
+		    ResultSet output = stmt.executeQuery();
+		    if(output.next())
+		    	return true;
+		} catch(SQLException sqlExcep) {
+		       System.out.println(sqlExcep);
+		} catch(Exception excep) {
+		       excep.printStackTrace();
+		}
+		return false;
 	}
 
 }

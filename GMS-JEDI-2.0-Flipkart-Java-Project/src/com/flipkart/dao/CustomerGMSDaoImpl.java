@@ -133,7 +133,7 @@ public class CustomerGMSDaoImpl implements CustomerGMSDao {
 		    System.out.println("BookingId \t Date \t    GymId");
 		    while(output.next()) {
 		    	System.out.printf("%-12s\t", output.getInt(1) );
-				System.out.printf("  %-7s\t",output.getString(2));
+				System.out.printf("  %-7s\t",output.getString(5));
 				System.out.printf("%-8s\t", output.getString(3) );
 		    	System.out.println("");
 		    }

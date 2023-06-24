@@ -4,9 +4,13 @@
 package com.flipkart.client;
 import java.util.*;
 
+
 import com.flipkart.bean.User;
 import com.flipkart.service.UserGMSService;
-
+import java.sql.Date;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 /**
  * 
  */
@@ -29,8 +33,10 @@ public class GMSApplicationClient {
 		String password = in.next();
 		User user = new User(username,password,0);
 		UserGMSService authentication = new UserGMSService();
+		LocalDateTime localDateTime = LocalDateTime.now();
 		if(authentication.authenticateUser(user) != null) {
 			System.out.println("Welcome " + username + "! You are logged in.");
+			System.out.println("Current Date and Time: "+ localDateTime);
 			int role = user.getRoleId();
 			switch(role) {
 			case 1: 

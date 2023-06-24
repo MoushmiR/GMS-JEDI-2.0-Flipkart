@@ -17,24 +17,32 @@ import com.flipkart.bean.*;
 public class UserGMSService {
 
 	UserGMSDao userGMSDao = new UserGMSDaoImpl();
+	
+	//registers customer in the database
 	public void registerCustomer(Customer customerData) {
 		userGMSDao.registerCustomer(customerData);
 ;	}
 	
-	public void registerGymOwner(GymOwner ownerData) {
-		
+	
+	//registers gym owner in the database
+	public void registerGymOwner(GymOwner ownerData) {	
 		userGMSDao.registerGymOwner(ownerData);
 	}
 	
+	
+	//used to login a user
 	public User authenticateUser(User userData)  throws UserNotFoundException {
 		return userGMSDao.isAuthenticated(userData);
-//		return userGMSDao.isAuthenticated(userData);
 	}
 	
+	
+	//used to regsiter a user
 	public void registerUser(User userData) {
 		userGMSDao.registerUser(userData);
 	}
 	
+	
+	//used to logout a user
 	public boolean logout(User userData) {
 		return true;
 	}

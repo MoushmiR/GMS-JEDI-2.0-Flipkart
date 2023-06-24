@@ -31,7 +31,7 @@ public class CustomerGMSMenu {
 //		CustomerActionPage(in, customer.getEmail());
 	}
 	
-	public void viewCatalog(Scanner in, String email) {
+	public void viewCatalog(Scanner in, String email) throws Exception {
 //		System.out.println("Welcome to FlipFit Gymnasium Application");
 //		System.out.println("Menu:-");
 		fetchGymList();
@@ -100,7 +100,7 @@ public class CustomerGMSMenu {
 
 		
 	}
-	public void CustomerActionPage(Scanner in, String email) {
+	public void CustomerActionPage(Scanner in, String email) throws Exception {
 		int choice = 0;
 		
 		while(choice != 4) {
@@ -117,11 +117,12 @@ public class CustomerGMSMenu {
 					break;
 				case 2:
 					customerGMSService.fetchBookedSlots(email);
+					break;
 				case 3:
 					cancelBookedSlots(in, email);
 					break;
 				case 4:
-					System.exit(0);
+					GMSApplicationClient.mainPage();
 					break;
 				default:
 					System.out.println("Incorrect choice!!! Please try again!!!");

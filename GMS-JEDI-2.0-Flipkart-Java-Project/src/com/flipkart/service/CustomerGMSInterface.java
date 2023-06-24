@@ -25,6 +25,7 @@ public interface CustomerGMSInterface {
 	public boolean checkSlotExists(String slotId, int gymId);
 	
 	public void fetchBookedSlots(String email);
+	
 	public void cancelBookedSlots(String email, int bookingId);
 	
 	public boolean checkGymApprove(int gymId);

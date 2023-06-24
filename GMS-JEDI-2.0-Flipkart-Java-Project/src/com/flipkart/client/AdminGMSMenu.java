@@ -135,7 +135,7 @@ public class AdminGMSMenu {
     	System.out.println("**********************************");		
 	}
 	
-	public void AdminPage(Scanner in) {
+	public void AdminPage(Scanner in) throws Exception {
 		while(true) {
 //			System.out.println("++++++++++++++++++++++++++++++++++++++++++++++");
 			System.out.println("1. View All Gym Owners");
@@ -176,7 +176,7 @@ public class AdminGMSMenu {
 				approveAllGymRequest();
 				break;
 			case 9:
-				System.exit(0);
+				GMSApplicationClient.mainPage();
 				break;
 			// Default case statement
 			default:

@@ -8,57 +8,71 @@ import com.flipkart.dao.*;
 import java.util.List;
 
 /**
- * 
+ * This class implements the AdminGMSInterface and provides the functionality for admin operations in the Gym Management System.
  */
 public class AdminGMSService implements AdminGMSInterface {
 
 	AdminGMSDao adminGMSDao = new AdminGMSDaoImpl();
 	
-	// allows admin to see all the gym owners
+	/**
+	 * Retrieves a list of all gym owners in the system.
+	 * @return List of GymOwner objects
+	 */
 	public List<GymOwner> seeAllGymOwner() {
 		return adminGMSDao.seeAllGymOwner();
 	}
 
-	
-	//allows admin to see all the gyms
+	/**
+	 * Retrieves a list of all gyms in the system.
+	 * @return List of Gymnasium objects
+	 */
 	public List<Gymnasium> seeAllGyms() {
 		return adminGMSDao.seeAllGyms();
 	}
 	
-	
-	//allows admin to see pending requests of gym owners to be approved
+	/**
+	 * Retrieves a list of pending gym owner requests.
+	 * @return List of GymOwner objects
+	 */
 	public List<GymOwner> seePendingGymOwnerRequest() {
 		return adminGMSDao.seePendingGymOwnerRequest();
 	}
 	
-	
-	//allows admin to see pending requests of gyms to be approved
+	/**
+	 * Retrieves a list of pending gym requests.
+	 * @return List of Gymnasium objects
+	 */
 	public List<Gymnasium> seePendingGymRequest() {
 		return adminGMSDao.seePendingGymRequest();
 	}
 
-	
-	//allows admin to approve a single gym owner
+	/**
+	 * Approves a single gym owner request.
+	 * @param requestId The ID of the request to be approved
+	 */
 	public void approveSingleOwnerRequest(String email) {
 		adminGMSDao.approveSingleOwnerRequest(email);
 	}
 
-	
-	//allows admin to approve all the owners who are unappproved
+	/**
+	 * Approves all pending gym owner requests.
+	 */
 	public void approveAllOwnerRequest() {
 		adminGMSDao.approveAllOwnerRequest();
 	}
 
-	
-	// allows admin to approve a single gym request
+	/**
+	 * Approves a single gym request.
+	 * @param gymId The ID of the gym request to be approved
+	 */
 	public void approveSingleGymRequest(int gymId) {
 		adminGMSDao.approveSingleGymRequest(gymId);
 	}
 
-	
-	//allows admin to approve all the gym requests which are unapproved
+	/**
+	 * Approves all pending gym requests.
+	 */
 	public void approveAllGymRequest() {
 		adminGMSDao.approveAllGymRequest();
 	}
-
 }

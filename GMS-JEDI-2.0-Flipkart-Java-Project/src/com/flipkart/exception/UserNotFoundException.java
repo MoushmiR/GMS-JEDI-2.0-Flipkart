@@ -2,7 +2,9 @@ package com.flipkart.exception;
 
 public class UserNotFoundException extends Exception{
 	
-	public UserNotFoundException() {
-        System.out.println("User not found!");
-    }
+	@Override
+	public String getMessage() {
+		return "Oops! Wrong credentials!";
+	}
+	
 }

@@ -132,15 +132,15 @@ public class GymOwnerGMSDaoImpl implements GymOwnerGMSDao {
 	
 	
 	public void addSlots(int gymId, String chosenSlots, List<Slots> slotInfo) {
+		int slotCapacity = findCapacity(gymId);
 		try{
 			conn = DBUtils.getConnection();
 	
 			stmt = conn.prepareStatement(SQLConstants.SQL_ALL_SLOTS);
-//			int slotCapacity = findCapacity(gymId);
-//			System.out.println(slotCapacity);
+			
 			for (int i = 0; i < chosenSlots.length(); i++) {
 				stmt.setString(1, String.valueOf(chosenSlots.charAt(i)));
-				stmt.setInt(2, 20);
+				stmt.setInt(2, slotCapacity);
 				stmt.setString(3, findAppropriateSlot(chosenSlots.substring(i,i+1),slotInfo));
 				stmt.setInt(4, gymId);
 				stmt.executeUpdate();
@@ -238,7 +238,6 @@ public class GymOwnerGMSDaoImpl implements GymOwnerGMSDao {
 		return;
 	}
 
-	@Override
 	public boolean checkOwnerApproval(String email) {
 		Connection conn = null;
 		PreparedStatement stmt = null;
@@ -259,7 +258,6 @@ public class GymOwnerGMSDaoImpl implements GymOwnerGMSDao {
 		return false;
 	}
 
-	@Override
 	public boolean checkGymApproval(int gymId) {
 		Connection conn = null;
 		PreparedStatement stmt = null;

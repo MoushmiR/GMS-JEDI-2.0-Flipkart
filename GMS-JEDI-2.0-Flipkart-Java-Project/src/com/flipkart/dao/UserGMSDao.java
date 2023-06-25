@@ -5,7 +5,7 @@ import com.flipkart.exception.UserNotFoundException;
 
 public interface UserGMSDao {
 	
-	public User isAuthenticated(User userData) throws UserNotFoundException ;
+	public User isAuthenticated(User userData) throws UserNotFoundException;
 	
 	public void registerCustomer(Customer customerData);
 	

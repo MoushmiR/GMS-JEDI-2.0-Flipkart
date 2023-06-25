@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.flipkart.dao.*;
+import com.flipkart.exception.NoSlotsFoundException;
 /**
  * 
  */
@@ -28,8 +29,14 @@ public class CustomerGMSService implements CustomerGMSInterface{
 	
 	
 	//fetches all available slots for a particular gym
-	public void fetchAvilableSlots(int gymId) {
-		customerDao.fetchSlotList(gymId);
+	public boolean fetchAvilableSlots(int gymId){
+		try {
+			customerDao.fetchSlotList(gymId);
+			return true;
+		}catch(NoSlotsFoundException excep) {
+			System.out.println(excep.getMessage());
+		}
+		return false;
 	}
 	
 	

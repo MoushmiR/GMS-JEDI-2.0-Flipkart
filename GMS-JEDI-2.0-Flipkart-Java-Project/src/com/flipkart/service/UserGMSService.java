@@ -31,8 +31,15 @@ public class UserGMSService {
 	
 	
 	//used to login a user
-	public User authenticateUser(User userData)  throws UserNotFoundException {
-		return userGMSDao.isAuthenticated(userData);
+	public User authenticateUser(User userData) {
+		try {
+			User authenticatedUser = userGMSDao.isAuthenticated(userData);
+			return authenticatedUser;
+		}
+		catch(UserNotFoundException excep) {
+			System.out.println(excep.getMessage());
+		}
+		return null;
 	}
 	
 	

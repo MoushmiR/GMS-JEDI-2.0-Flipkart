@@ -54,8 +54,6 @@ public class GMSApplicationClient {
 			break;
 			}
 		}else {
-			System.out.println("Invalid Credentials");
-			System.out.println("You need to re-login!!");
 			login();
 		}
 		
@@ -71,32 +69,39 @@ public class GMSApplicationClient {
 		System.out.println("4. exit");
 		
 		Scanner in = new Scanner(System.in);
-		int choice =in.nextInt();
-		
-		switch(choice) {
-		case 1:
-			login();
-			break;
-		case 2:
-			CustomerGMSMenu Customer = new CustomerGMSMenu();
-			Customer.CustomerRegistration(in);
-			System.out.println("Please Login");
-			login();
-			break;
-		case 3:
-			GymnasiumGMSMenu Owner = new GymnasiumGMSMenu();
-			Owner.GymOwnerRegistration(in);
-			System.out.println("Please Login");
-			login();
-			break;
-		case 4:
-			System.out.println("Exiting.....");
-			System.exit(0);
-			break;
-		default: 
-			System.out.println("Wrong choice");
+		try {
+			int choice =in.nextInt();
+			
+			switch(choice) {
+			case 1:
+				login();
+				break;
+			case 2:
+				CustomerGMSMenu Customer = new CustomerGMSMenu();
+				Customer.CustomerRegistration(in);
+				System.out.println("Please Login");
+				login();
+				break;
+			case 3:
+				GymnasiumGMSMenu Owner = new GymnasiumGMSMenu();
+				Owner.GymOwnerRegistration(in);
+				System.out.println("Please Login");
+				login();
+				break;
+			case 4:
+				System.out.println("Exiting.....");
+				System.exit(0);
+				break;
+			default: 
+				System.out.println("Wrong choice");
+				mainPage();
+			}
+		}
+		catch(InputMismatchException excep) {
+			System.out.println("Please give relevant input!");
 			mainPage();
 		}
+		
 		
 	}
 	public static void main(String[] args) throws Exception {

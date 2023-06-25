@@ -9,6 +9,7 @@ import java.util.List;
 
 import com.flipkart.bean.Gymnasium;
 import com.flipkart.constants.SQLConstants;
+import com.flipkart.exception.NoSlotsFoundException;
 import com.flipkart.utils.DBUtils;
 
 public class CustomerGMSDaoImpl implements CustomerGMSDao {
@@ -53,7 +54,7 @@ public class CustomerGMSDaoImpl implements CustomerGMSDao {
 		return gymDetails;
 	}
 	
-	public void fetchSlotList(int gymId) {
+	public void fetchSlotList(int gymId) throws NoSlotsFoundException{
 //		System.out.println("Connecting to database...");
 		
 		Connection conn = null;
@@ -64,19 +65,20 @@ public class CustomerGMSDaoImpl implements CustomerGMSDao {
 		    stmt = conn.prepareStatement(SQLConstants.SQL_FETCH_GYM_SLOT_QUERY);
 		    stmt.setInt(1, gymId); 
 		    ResultSet output = stmt.executeQuery();
+		    if(!output.next()) {
+		    	throw new NoSlotsFoundException();
+		    }
 		    System.out.println("SlotId \t Capacity \t SlotTime \t GymId");
-		    while(output.next()) {
+		    do {
 		    	System.out.printf("%-7s\t", output.getString(1) );
 				System.out.printf("  %-9s\t",output.getString(2));
 				System.out.printf("  %-9s\t", output.getString(3) );
 				System.out.printf("  %-9s\t", output.getString(4) );
 		    	System.out.println("");
-		    }
+		    }while(output.next());
 		    System.out.println("*********************************************");
 	    } catch(SQLException sqlExcep) {
 		       System.out.println(sqlExcep);
-	    } catch(Exception excep) {
-	           excep.printStackTrace();
 	    }
 	}
 	

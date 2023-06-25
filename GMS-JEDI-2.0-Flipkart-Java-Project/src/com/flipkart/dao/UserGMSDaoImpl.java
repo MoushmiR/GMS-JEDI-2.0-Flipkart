@@ -1,6 +1,7 @@
 package com.flipkart.dao;
 import com.flipkart.bean.*;
 import com.flipkart.constants.SQLConstants;
+import com.flipkart.exception.UserNotFoundException;
 import com.flipkart.utils.DBUtils;
 
 import java.sql.Connection;
@@ -18,7 +19,7 @@ public class UserGMSDaoImpl implements UserGMSDao{
 	Connection conn = null;
 	PreparedStatement stmt = null;
 	
-	public User isAuthenticated(User userData) {
+	public User isAuthenticated(User userData) throws UserNotFoundException {
 		
 		
 		try{
@@ -37,14 +38,14 @@ public class UserGMSDaoImpl implements UserGMSDao{
             	int roleId = rs.getInt("roleId");
             	userData.setRoleId(roleId);
             }
+            else {
+            	throw new UserNotFoundException();
+            }
 		      stmt.close();
 //			      conn.close();
 		    }catch(SQLException se){
 		      //Handle errors for JDBC
 		      se.printStackTrace();
-		    }catch(Exception e){
-		      //Handle errors for Class.forName
-		      e.printStackTrace();
 		    }
 		//end try
 //		System.out.println("Authentication checked");

@@ -9,16 +9,16 @@ package com.flipkart.bean;
 public class BookedSlot {
 	
 	private String slotId;
-	private String gymId;
+	private int gymId;
 	private String customerEmail;
 	private String date;
 	
 	
-	private String bookingId;
-	public String getBookingId() {
+	private int bookingId;
+	public int getBookingId() {
 		return bookingId;
 	}
-	public void setBookingId(String bookingId) {
+	public void setBookingId(int bookingId) {
 		this.bookingId = bookingId;
 	}
 	public String getSlotId() {
@@ -27,10 +27,10 @@ public class BookedSlot {
 	public void setSlotId(String slotId) {
 		this.slotId = slotId;
 	}
-	public String getGymId() {
+	public int getGymId() {
 		return gymId;
 	}
-	public void setGymId(String gymId) {
+	public void setGymId(int gymId) {
 		this.gymId = gymId;
 	}
 	public String getCustomerEmail() {

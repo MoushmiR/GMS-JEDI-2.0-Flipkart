@@ -35,38 +35,31 @@ public class CustomerGMSMenu {
 //		System.out.println("Welcome to FlipFit Gymnasium Application");
 //		System.out.println("Menu:-");
 		fetchGymList();
-		
+
 		System.out.print("Choose Gym ID: ");
 		int gymId = in.nextInt();
-		boolean check = customerGMSService.checkGymApprove(gymId);
-		
-		if(check == false)
-		{
-			System.out.println("This gym has not been approved yet!");
-			viewCatalog(in, email);
-			return;
-		}
-		boolean slotsAvailable = customerGMSService.fetchAvilableSlots(gymId);
-		if(slotsAvailable) {
+
+		List<SlotsNew> slotsAvailable = customerGMSService.fetchAvailableSlots(gymId);
+		if(slotsAvailable.size() > 0) {
 			System.out.print("Enter Slot ID for which you want to make booking: ");
 			String slotId = in.next();
-			
-			boolean flag =customerGMSService.checkSlotExists(slotId, gymId);
+
+			boolean flag = customerGMSService.checkSlotExists(slotId, gymId);
 			if(flag ==false)
 			{
 				System.out.println("No slots found for this gym");
 				CustomerActionPage(in, email);
 				return;
 			}
-			
+
 			System.out.print("Enter your Date: ");
 			String date = in.next();
-			
+
 			int response = customerGMSService.bookSlots(gymId, slotId, email, date);
 			switch (response) {
 				case 0:
 					System.out.println("This time is already booked\nCancelling that slot and booking new");
-					
+
 					break;
 				case 1:
 					System.out.println("There are no more slots left");
@@ -82,7 +75,7 @@ public class CustomerGMSMenu {
 		else {
 			viewCatalog(in,email);
 		}
-		
+
 	}
 	
 	public void fetchGymList() {

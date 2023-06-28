@@ -2,18 +2,20 @@ package com.flipkart.dao;
 
 import java.util.List;
 
+import com.flipkart.bean.BookedSlot;
 import com.flipkart.bean.Gymnasium;
+import com.flipkart.bean.SlotsNew;
 import com.flipkart.exception.NoSlotsFoundException;
 
 public interface CustomerGMSDao {
 
 	public List<Gymnasium> fetchGymList();
 	
-	public void fetchSlotList(int gymId) throws NoSlotsFoundException;
+	public List<SlotsNew> fetchSlotList(int gymId) throws NoSlotsFoundException;
 	
-	public void fetchBookedSlots(String email);
+	public List<BookedSlot> fetchBookedSlots(String email);
 	
-	public void bookSlots(int gymId, String slotId,String customerId,String date);
+	public Object bookSlots(int gymId, String slotId, String customerId, String date);
 	
 	public boolean isFull(String slotId,String date);
 

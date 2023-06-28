@@ -3,8 +3,7 @@
  */
 package com.flipkart.service;
 import com.flipkart.bean.*;
-import java.time.LocalDate;
-import java.util.ArrayList;
+
 import java.util.List;
 
 import com.flipkart.dao.*;
@@ -38,14 +37,8 @@ public class CustomerGMSService implements CustomerGMSInterface{
 	 * @param gymId The ID of the gym
 	 * @return true if slots are available, false otherwise
 	 */
-	public boolean fetchAvilableSlots(int gymId){
-		try {
-			customerDao.fetchSlotList(gymId);
-			return true;
-		} catch(NoSlotsFoundException excep) {
-			System.out.println(excep.getMessage());
-		}
-		return false;
+	public List<SlotsNew> fetchAvailableSlots(int gymId) throws NoSlotsFoundException {
+		return customerDao.fetchSlotList(gymId);
 	}
 
 	/**
@@ -98,8 +91,8 @@ public class CustomerGMSService implements CustomerGMSInterface{
 	 * Fetches the booked slots for a customer based on the customer's email.
 	 * @param email The email of the customer
 	 */
-	public void fetchBookedSlots(String email) {
-		customerDao.fetchBookedSlots(email);
+	public List<BookedSlot> fetchBookedSlots(String email) {
+		return customerDao.fetchBookedSlots(email);
 	}
 
 	/**
@@ -114,11 +107,14 @@ public class CustomerGMSService implements CustomerGMSInterface{
 
 	/**
 	 * Cancels a booked slot for a customer based on the booking ID.
-	 * @param email The email of the customer
+	 *
+	 * @param email     The email of the customer
 	 * @param bookingId The ID of the booking to cancel
+	 * @return
 	 */
-	public void cancelBookedSlots(String email, int bookingId) {
+	public Object cancelBookedSlots(String email, int bookingId) {
 		customerDao.cancelBookedSlots(email, bookingId);
+		return null;
 	}
 
 	/**

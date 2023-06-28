@@ -1,11 +1,8 @@
 package com.flipkart.service;
 
-import java.time.LocalDate;
 import java.util.List;
 
-import com.flipkart.bean.Customer;
-import com.flipkart.bean.Gymnasium;
-import com.flipkart.bean.Slots;
+import com.flipkart.bean.*;
 import com.flipkart.exception.NoSlotsFoundException;
 
 public interface CustomerGMSInterface {
@@ -27,7 +24,7 @@ public interface CustomerGMSInterface {
 	 * @param gymId The ID of the gym
 	 * @return true if slots are available, false otherwise
 	 */
-	public boolean fetchAvilableSlots(int gymId);
+	public List<SlotsNew> fetchAvailableSlots(int gymId) throws NoSlotsFoundException;
 
 	/**
 	 * Books slots for a customer at a specified gym, date, and slot time.
@@ -37,7 +34,7 @@ public interface CustomerGMSInterface {
 	 * @param date The date of the slot
 	 * @return The booking ID if the slots are successfully booked, 0 otherwise
 	 */
-	public int bookSlots(int gymId, String slotId, String customerId, String date);
+	public int bookSlots(int gymId, String slotId, String email, String date);
 
 	/**
 	 * Checks if a customer has already booked a slot at a specified slot time and date.
@@ -68,14 +65,16 @@ public interface CustomerGMSInterface {
 	 * Fetches the booked slots for a customer based on the customer's email.
 	 * @param email The email of the customer
 	 */
-	public void fetchBookedSlots(String email);
+	public List<BookedSlot> fetchBookedSlots(String email);
 
 	/**
 	 * Cancels a booked slot for a customer based on the booking ID.
-	 * @param email The email of the customer
+	 *
+	 * @param email     The email of the customer
 	 * @param bookingId The ID of the booking to cancel
+	 * @return
 	 */
-	public void cancelBookedSlots(String email, int bookingId);
+	public Object cancelBookedSlots(String email, int bookingId);
 
 	/**
 	 * Checks if a gym is approved for a specified gym ID.

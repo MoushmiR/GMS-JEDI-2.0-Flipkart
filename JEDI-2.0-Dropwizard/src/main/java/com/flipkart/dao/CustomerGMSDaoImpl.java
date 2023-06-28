@@ -7,7 +7,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.flipkart.bean.BookedSlot;
 import com.flipkart.bean.Gymnasium;
+import com.flipkart.bean.SlotsNew;
 import com.flipkart.constants.SQLConstants;
 import com.flipkart.exception.NoSlotsFoundException;
 import com.flipkart.utils.DBUtils;
@@ -46,36 +48,34 @@ public class CustomerGMSDaoImpl implements CustomerGMSDao {
 	    }
 		return gymDetails;
 	}
-	
-	public void fetchSlotList(int gymId) throws NoSlotsFoundException{
+
+	public List<SlotsNew> fetchSlotList(int gymId) throws NoSlotsFoundException{
 //		System.out.println("Connecting to database...");
-		
+		List<SlotsNew> allSlots = new ArrayList<SlotsNew>();
 		Connection conn = null;
 		PreparedStatement stmt = null;
-		
+
 		try {
 			conn = DBUtils.getConnection();
-		    stmt = conn.prepareStatement(SQLConstants.SQL_FETCH_GYM_SLOT_QUERY);
-		    stmt.setInt(1, gymId); 
-		    ResultSet output = stmt.executeQuery();
-		    if(!output.next()) {
-		    	throw new NoSlotsFoundException();
-		    }
-		    System.out.println("SlotId \t Capacity \t SlotTime \t GymId");
-		    do {
-		    	System.out.printf("%-7s\t", output.getString(1) );
-				System.out.printf("  %-9s\t",output.getString(2));
-				System.out.printf("  %-9s\t", output.getString(3) );
-				System.out.printf("  %-9s\t", output.getString(4) );
-		    	System.out.println("");
-		    }while(output.next());
-		    System.out.println("*********************************************");
-	    } catch(SQLException sqlExcep) {
-		       System.out.println(sqlExcep);
-	    }
+			stmt = conn.prepareStatement(SQLConstants.SQL_FETCH_GYM_SLOT_QUERY);
+			stmt.setInt(1, gymId);
+			ResultSet output = stmt.executeQuery();
+			while(output.next()) {
+				SlotsNew slotsNew = new SlotsNew();
+				slotsNew.setSlotId(output.getString(1));
+				slotsNew.setCapacity(output.getInt(2));
+				slotsNew.setSlotTime(output.getString(3));
+				slotsNew.setGymId(output.getInt(4));
+				System.out.println("");
+				allSlots.add(slotsNew);
+			}
+		} catch(SQLException sqlExcep) {
+			System.out.println(sqlExcep);
+		}
+		return allSlots;
 	}
 	
-	public void bookSlots(int gymId, String slotId,String email,String date) {
+	public Object bookSlots(int gymId, String slotId, String email, String date) {
 //		System.out.println("Connecting to database...");
 		Connection conn = null;
 		PreparedStatement stmt = null;
@@ -96,8 +96,8 @@ public class CustomerGMSDaoImpl implements CustomerGMSDao {
 	    } catch(Exception excep) {
 	           excep.printStackTrace();
 	    }
-	    
-	    return;
+
+		return null;
 	}
 	
 	public boolean isFull(String slotId,String date) {
@@ -126,34 +126,38 @@ public class CustomerGMSDaoImpl implements CustomerGMSDao {
 	    }
 		return false;
 	}
-	
-	public void fetchBookedSlots(String email) {
 
-		
+	public List<BookedSlot> fetchBookedSlots(String email) {
+
+		List<BookedSlot> allSlots = new ArrayList<BookedSlot>();
 //		System.out.println("Connecting to database...");
-		
+
 		Connection conn = null;
 		PreparedStatement stmt = null;
-		
+
 		try {
 			conn = DBUtils.getConnection();
-		    stmt = conn.prepareStatement(SQLConstants.SQL_FETCH_BOOKED_SLOT_QUERY);
-		    stmt.setString(1, email); 
-		    ResultSet output = stmt.executeQuery();
-		    System.out.println("BookingId \t Date \t    GymId");
-		    while(output.next()) {
-		    	System.out.printf("%-12s\t", output.getInt(1) );
-				System.out.printf("  %-7s\t",output.getString(5));
-				System.out.printf("%-8s\t", output.getString(3) );
-		    	System.out.println("");
-		    }
-		    System.out.println("*********************************************");
+			stmt = conn.prepareStatement(SQLConstants.SQL_FETCH_BOOKED_SLOT_QUERY);
+			stmt.setString(1, email);
+			ResultSet output = stmt.executeQuery();
+//			System.out.println("BookingId \t Date \t    GymId");
+			while(output.next()) {
+				BookedSlot bookedSlot = new BookedSlot();
+				bookedSlot.setBookingId(output.getInt(1));
+				bookedSlot.setSlotId(output.getString(2));
+				bookedSlot.setGymId(output.getInt(3));
+				bookedSlot.setCustomerEmail(output.getString(4));
+				bookedSlot.setDate(output.getString(5));
+				allSlots.add(bookedSlot);
+			}
+			System.out.println("***************");
 		} catch(SQLException sqlExcep) {
-		       System.out.println(sqlExcep);
+			System.out.println(sqlExcep);
 		} catch(Exception excep) {
-		       excep.printStackTrace();
+			excep.printStackTrace();
 		}
-    }
+		return allSlots;
+	}
 	
 	
 	public void cancelBooking(String slotId, String email, String date) {

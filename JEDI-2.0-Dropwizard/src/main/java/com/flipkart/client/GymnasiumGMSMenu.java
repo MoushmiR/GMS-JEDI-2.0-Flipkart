@@ -96,7 +96,7 @@ public class GymnasiumGMSMenu {
 			System.out.printf("%-8s\t", gym.getNumItem());
 			System.out.printf("%-8s\t", gym.getTotalArea());
 			System.out.printf("%-8s\t", gym.getAddress());
-			if(gym.isApproved())
+			if(gym.getIsApproved())
 			{
 				System.out.printf("%-8s\t", "Yes");
 			}
@@ -146,7 +146,8 @@ public class GymnasiumGMSMenu {
 			if(check==false)
 			{
 				System.out.println("You have not been approved yet.");
-				GMSApplicationClient.mainPage();
+				System.out.println("Exiting....");
+				System.exit(0);
 			}
 			gymOwner.setEmail(email);
 		

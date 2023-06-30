@@ -1,32 +1,28 @@
 package com.flipkart.RESTAPI;
 
-import javax.ws.rs.Consumes;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+
 import com.flipkart.bean.*;
 import com.flipkart.service.*;
-
 @Path("/v1/authentication")
 public class User_API {
     @Path("login")
     @POST
+    @Produces("application/json")
     @Consumes(MediaType.APPLICATION_JSON)
-    public String login(User user){
+    public static Response login(User user){
         UserGMSService authentication = new UserGMSService();
-        com.flipkart.bean.User loggedUser = authentication.authenticateUser(user);
-        if(loggedUser != null) {
-            int role = loggedUser.getRoleId();
-            switch (role){
-                case 1: return "Welcome Customer";
-                case 2: return "Welcome Gym Owner";
-                case 3: return "Welcome Admin";
-                default:return "Something Unexpected";
-            }
+        User user1 =authentication.authenticateUser(user);
+        if(user1 == null)
+        {
+            user1.setRoleId(5);
+            user1.setEmail("Wrong");
+            user1.setPassword("Wrong");
         }
-        return "User not found!";
+        return Response.ok(user1).build();
     }
-
 
     @Path("registeruser")
     @POST
@@ -41,7 +37,16 @@ public class User_API {
     @Consumes(MediaType.APPLICATION_JSON)
     public void registerCustomer(Customer customer){
         UserGMSService userGMSService = new UserGMSService();
-        userGMSService.registerCustomer(customer);
+        User user =new User();
+        user.setEmail(customer.getEmail());
+        user.setPassword(customer.getPassword());
+        user.setRoleId(1);
+        try {
+            userGMSService.registerUser(user);
+            userGMSService.registerCustomer(customer);
+        } catch (Exception e) {
+        }
+
     }
 
     @Path("registergymowner")

@@ -95,9 +95,7 @@ public class CustomerGMSMenu {
 		customerGMSService.fetchBookedSlots(email);
 		System.out.print("Enter Booking ID that you want to cancel: ");
 		int bookingId =in.nextInt();
-		customerGMSService.cancelBookedSlots(email, bookingId);
-
-		
+		customerGMSService.cancelBookedSlots(bookingId);
 	}
 	
 	public void CustomerActionPage(Scanner in, String email) throws Exception {

@@ -23,4 +23,6 @@ public interface GymOwnerGMSDao {
 	public boolean checkGymApproval(int gymId);
 
 	public boolean checkIfAlreadyBooked(int gymId);
+
+	Gymnasium getGymInfo(int gymId);
 }

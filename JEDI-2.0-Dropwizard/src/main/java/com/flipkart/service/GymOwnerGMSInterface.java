@@ -18,6 +18,8 @@ public interface GymOwnerGMSInterface {
 	 */
 	public GymOwner fetchOwnerDetails(String gymOwnerUserName);
 
+	public Gymnasium getGymInfo(int gymId);
+
 	/**
 	 * Adds the details of a gym to the system.
 	 * @param gymDetails The Gymnasium object representing the gym details

@@ -41,10 +41,11 @@ public class Customer_API {
     @Path("cancelbooking")
     @DELETE
     @Produces("application/json")
-    public static Response cancelBooking(@QueryParam("email") String email, @QueryParam("bookingId") int bookingId){
+    public static Response cancelBooking(@QueryParam("bookingId") int bookingId){
+
         CustomerGMSInterface customerService = new CustomerGMSService();
         try{
-            return Response.ok(customerService.cancelBookedSlots(email,bookingId)).build();
+            return Response.ok(customerService.cancelBookedSlots(bookingId)).build();
         }
         catch(Exception exception){
             return Response.status(Response.Status.UNAUTHORIZED).entity(exception.getMessage()).build();
@@ -58,6 +59,19 @@ public class Customer_API {
         CustomerGMSDao customerGMSDao = new CustomerGMSDaoImpl();
         try{
             return Response.ok(customerGMSDao.bookSlots(gymId,slotId,email,date)).build();
+        }
+        catch(Exception exception){
+            return Response.status(Response.Status.UNAUTHORIZED).entity(exception.getMessage()).build();
+        }
+    }
+
+    @Path("mybookings")
+    @GET
+    @Produces("application/json")
+    public static Response getBookings(@QueryParam("email") String email){
+        CustomerGMSDao customerGMSDao = new CustomerGMSDaoImpl();
+        try{
+            return Response.ok(customerGMSDao.fetchBookedSlots(email)).build();
         }
         catch(Exception exception){
             return Response.status(Response.Status.UNAUTHORIZED).entity(exception.getMessage()).build();

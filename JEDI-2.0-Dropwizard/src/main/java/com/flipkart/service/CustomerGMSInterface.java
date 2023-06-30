@@ -65,7 +65,7 @@ public interface CustomerGMSInterface {
 	 * Fetches the booked slots for a customer based on the customer's email.
 	 * @param email The email of the customer
 	 */
-	public List<BookedSlot> fetchBookedSlots(String email);
+	public List<UserBookings> fetchBookedSlots(String email);
 
 	/**
 	 * Cancels a booked slot for a customer based on the booking ID.
@@ -74,7 +74,7 @@ public interface CustomerGMSInterface {
 	 * @param bookingId The ID of the booking to cancel
 	 * @return
 	 */
-	public Object cancelBookedSlots(String email, int bookingId);
+	public Object cancelBookedSlots(int bookingId);
 
 	/**
 	 * Checks if a gym is approved for a specified gym ID.

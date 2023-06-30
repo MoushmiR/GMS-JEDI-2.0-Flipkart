@@ -24,7 +24,7 @@ public class SQLConstants {
 	public static final String SQL_COUNT_CURRENT_CAPACITY_QUERY = "Select Count(*) From BookedSlot Where slotId=? AND date=?";
 	public static final String SQL_CHECK_CAPACITY_QUERY = "Select * From SlotsNew Where slotId=?";
 	public static final String SQL_BOOK_SLOT_QUERY="INSERT INTO BookedSlot (slotId,gymId,customerEmail,date) values(?, ?, ?, ?)";
-	public static final String SQL_FETCH_BOOKED_SLOT_QUERY="Select * From BookedSlot where customerEmail = ?";
+	public static final String SQL_FETCH_BOOKED_SLOT_QUERY="SELECT DISTINCT BookedSlot.bookingId, Slots.slotId, Gymnasium.name, Gymnasium.address, BookedSlot.date, Slots.startTime FROM BookedSlot JOIN Gymnasium ON BookedSlot.gymId = Gymnasium.gymId JOIN Slots ON BookedSlot.slotId = Slots.slotId WHERE BookedSlot.customerEmail=?";
 	public static final String SQL_ALREADY_BOOKED_SLOT_QUERY = "Select * from BookedSlot where customerEmail = ? and slotId = ? and date = ?";
 	public static final String SQL_CANCEL_BOOKED_SLOT_QUERY = "Delete from BookedSlot where customerEmail = ? and slotId = ? and date = ?";
 	public static final String SQL_CHECK_SLOT_QUERY = "Select * from SlotsNew where slotId = ? and gymId= ?";
@@ -33,4 +33,5 @@ public class SQLConstants {
 	public static final String SQL_CHECK_GYM_APPROVE = "Select * from Gymnasium where gymId=? and isApproved=1";
 	public static final String SQL_CHECK_OWNER_APPROVE = "Select * from GymOwner where email=? and approved=1";
 	public static final String SQL_CHECK_SLOT_FOR_GYM = "SELECT * FROM SlotsNew WHERE gymId=?";
+    public static final String SQL_FETCH_GYM_INFO = "SELECT * FROM Gymnasium WHERE gymId=?";
 }

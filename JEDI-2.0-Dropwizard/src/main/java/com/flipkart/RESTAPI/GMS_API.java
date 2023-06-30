@@ -12,5 +12,6 @@ public class GMS_API extends Application<GMS_API_Configuration> {
         environment.jersey().register(User_API.class);
         environment.jersey().register(Admin_API.class);
         environment.jersey().register(Customer_API.class);
+        environment.jersey().register(Gym_API.class);
     }
 }

@@ -28,6 +28,12 @@ public class GymOwnerGMSService implements GymOwnerGMSInterface{
 	public GymOwner fetchOwnerDetails(String gymOwnerId) {
 	return gymOwnerGMSDao.fetchOwnerDetails(gymOwnerId);
 	}
+
+	@Override
+	public Gymnasium getGymInfo(int gymId) {
+		return gymOwnerGMSDao.getGymInfo(gymId);
+	}
+
 	/**
 
 	This method fetches all the possible slots that a gym owner can select from.

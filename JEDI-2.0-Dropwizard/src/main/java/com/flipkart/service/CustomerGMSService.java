@@ -91,7 +91,7 @@ public class CustomerGMSService implements CustomerGMSInterface{
 	 * Fetches the booked slots for a customer based on the customer's email.
 	 * @param email The email of the customer
 	 */
-	public List<BookedSlot> fetchBookedSlots(String email) {
+	public List<UserBookings> fetchBookedSlots(String email) {
 		return customerDao.fetchBookedSlots(email);
 	}
 
@@ -108,12 +108,12 @@ public class CustomerGMSService implements CustomerGMSInterface{
 	/**
 	 * Cancels a booked slot for a customer based on the booking ID.
 	 *
-	 * @param email     The email of the customer
+	 *
 	 * @param bookingId The ID of the booking to cancel
 	 * @return
 	 */
-	public Object cancelBookedSlots(String email, int bookingId) {
-		customerDao.cancelBookedSlots(email, bookingId);
+	public Object cancelBookedSlots(int bookingId) {
+		customerDao.cancelBookedSlots(bookingId);
 		return null;
 	}
 

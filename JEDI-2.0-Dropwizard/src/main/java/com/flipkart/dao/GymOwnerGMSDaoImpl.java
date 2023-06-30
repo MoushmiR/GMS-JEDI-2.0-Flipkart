@@ -129,8 +129,39 @@ public class GymOwnerGMSDaoImpl implements GymOwnerGMSDao {
 		}
 		return false;
 	}
-	
-	
+
+	@Override
+	public Gymnasium getGymInfo(int gymId) {
+		Gymnasium gymDetails = new Gymnasium();
+
+		try {
+			conn = DBUtils.getConnection();
+
+			stmt = conn.prepareStatement(SQLConstants.SQL_FETCH_GYM_INFO);
+			stmt.setInt(1, gymId);
+
+			ResultSet rs = stmt.executeQuery();
+			rs.next();
+			gymDetails.setGymId(rs.getInt("gymId"));
+			gymDetails.setGymOwnerEmail(rs.getString("gymOwnerEmail"));
+			gymDetails.setName(rs.getString("name"));
+			gymDetails.setAddress(rs.getString("address"));
+			gymDetails.setTotalArea(rs.getDouble("totalArea"));
+			gymDetails.setNumItem(rs.getInt("numItem"));
+			gymDetails.setNumSeatsPerSlot(rs.getInt("numSeatsPerSlot"));
+
+		} catch (SQLException se) {
+			// Handle errors for JDBC
+			se.printStackTrace();
+		} catch (Exception e) {
+			// Handle errors for Class.forName
+			e.printStackTrace();
+		}
+
+		return gymDetails;
+	}
+
+
 	public void addSlots(int gymId, String chosenSlots, List<Slots> slotInfo) {
 		int slotCapacity = findCapacity(gymId);
 		try{

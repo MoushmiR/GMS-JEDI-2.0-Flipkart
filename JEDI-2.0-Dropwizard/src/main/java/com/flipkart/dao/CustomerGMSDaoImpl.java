@@ -1,15 +1,10 @@
 package com.flipkart.dao;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.flipkart.bean.BookedSlot;
-import com.flipkart.bean.Gymnasium;
-import com.flipkart.bean.SlotsNew;
+import com.flipkart.bean.*;
 import com.flipkart.constants.SQLConstants;
 import com.flipkart.exception.NoSlotsFoundException;
 import com.flipkart.utils.DBUtils;
@@ -127,10 +122,9 @@ public class CustomerGMSDaoImpl implements CustomerGMSDao {
 		return false;
 	}
 
-	public List<BookedSlot> fetchBookedSlots(String email) {
+	public List<UserBookings> fetchBookedSlots(String email) {
 
-		List<BookedSlot> allSlots = new ArrayList<BookedSlot>();
-//		System.out.println("Connecting to database...");
+		List<UserBookings> bookedSlots = new ArrayList<UserBookings>();
 
 		Connection conn = null;
 		PreparedStatement stmt = null;
@@ -139,24 +133,23 @@ public class CustomerGMSDaoImpl implements CustomerGMSDao {
 			conn = DBUtils.getConnection();
 			stmt = conn.prepareStatement(SQLConstants.SQL_FETCH_BOOKED_SLOT_QUERY);
 			stmt.setString(1, email);
-			ResultSet output = stmt.executeQuery();
-//			System.out.println("BookingId \t Date \t    GymId");
-			while(output.next()) {
-				BookedSlot bookedSlot = new BookedSlot();
-				bookedSlot.setBookingId(output.getInt(1));
-				bookedSlot.setSlotId(output.getString(2));
-				bookedSlot.setGymId(output.getInt(3));
-				bookedSlot.setCustomerEmail(output.getString(4));
-				bookedSlot.setDate(output.getString(5));
-				allSlots.add(bookedSlot);
+			ResultSet rs = stmt.executeQuery();
+			while(rs.next()) {
+				UserBookings userBooking = new UserBookings();
+				userBooking.setBookingId(rs.getInt("bookingId"));
+				userBooking.setSlotId(rs.getString("slotId"));
+				userBooking.setName(rs.getString("name"));
+				userBooking.setDate(rs.getString("date"));
+				userBooking.setAddress(rs.getString("address"));
+				userBooking.setStartTime(rs.getString("startTime"));
+				bookedSlots.add(userBooking);
 			}
-			System.out.println("***************");
 		} catch(SQLException sqlExcep) {
 			System.out.println(sqlExcep);
 		} catch(Exception excep) {
 			excep.printStackTrace();
 		}
-		return allSlots;
+		return bookedSlots;
 	}
 	
 	
@@ -230,7 +223,7 @@ public class CustomerGMSDaoImpl implements CustomerGMSDao {
 	}
 
 
-	public void cancelBookedSlots(String email, int bookingId) {
+	public void cancelBookedSlots(int bookingId) {
 		// TODO Auto-generated method stub
 		Connection conn = null;
 		PreparedStatement stmt = null;

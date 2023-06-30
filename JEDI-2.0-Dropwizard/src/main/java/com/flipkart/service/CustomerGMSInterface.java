@@ -30,7 +30,6 @@ public interface CustomerGMSInterface {
 	 * Books slots for a customer at a specified gym, date, and slot time.
 	 * @param gymId The ID of the gym
 	 * @param slotId The ID of the slot
-	 * @param customerId The ID of the customer
 	 * @param date The date of the slot
 	 * @return The booking ID if the slots are successfully booked, 0 otherwise
 	 */
@@ -70,7 +69,6 @@ public interface CustomerGMSInterface {
 	/**
 	 * Cancels a booked slot for a customer based on the booking ID.
 	 *
-	 * @param email     The email of the customer
 	 * @param bookingId The ID of the booking to cancel
 	 * @return
 	 */
@@ -83,6 +81,8 @@ public interface CustomerGMSInterface {
 	 */
 	public boolean checkGymApprove(int gymId);
 
-	
+	public int findAvailability(int gymId, String slotId, String date);
+
+	public List<SlotsNew> allAvailableSlots(int gymId, String date);
 	
 }

@@ -72,5 +72,4 @@ public interface GymOwnerGMSInterface {
 	 * @return true if the gym is already booked, false otherwise
 	 */
 	public boolean checkIfAlreadyBooked(int gymId);
-
 }

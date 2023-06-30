@@ -117,6 +117,9 @@ public class CustomerGMSService implements CustomerGMSInterface{
 		return null;
 	}
 
+	public int findAvailability(int gymId, String slotId, String date){
+		return customerDao.findAvailableSlots(gymId,slotId,date);
+	}
 	/**
 	 * Checks if a gym is approved for a specified gym ID.
 	 * @param gymId The ID of the gym
@@ -126,5 +129,8 @@ public class CustomerGMSService implements CustomerGMSInterface{
 		return customerDao.checkGymApprove(gymId);
 	}
 
+	public List<SlotsNew> allAvailableSlots(int gymId, String date){
+		return customerDao.allAvailableSlots(gymId, date);
+	}
 
 }

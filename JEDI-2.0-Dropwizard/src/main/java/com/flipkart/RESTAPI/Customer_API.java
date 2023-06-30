@@ -78,4 +78,17 @@ public class Customer_API {
         }
     }
 
+    @Path("findavailability")
+    @GET
+    @Produces("application/json")
+    public static Response findAvailability(@QueryParam("gymId") int gymId, @QueryParam("date") String date){
+        CustomerGMSDao customerGMSDao = new CustomerGMSDaoImpl();
+        try{
+            return Response.ok(customerGMSDao.allAvailableSlots(gymId, date)).build();
+        }
+        catch(Exception exception){
+            return Response.status(Response.Status.UNAUTHORIZED).entity(exception.getMessage()).build();
+        }
+    }
+
 }

@@ -34,4 +34,5 @@ public class SQLConstants {
 	public static final String SQL_CHECK_OWNER_APPROVE = "Select * from GymOwner where email=? and approved=1";
 	public static final String SQL_CHECK_SLOT_FOR_GYM = "SELECT * FROM SlotsNew WHERE gymId=?";
     public static final String SQL_FETCH_GYM_INFO = "SELECT * FROM Gymnasium WHERE gymId=?";
+	public static final String SQL_FIND_USED_SLOTS = "SELECT COUNT(*) FROM BookedSlot WHERE gymId=? AND date=? AND slotId=?";
 }

@@ -10,7 +10,8 @@ import com.flipkart.exception.NoSlotsFoundException;
 import com.flipkart.utils.DBUtils;
 
 public class CustomerGMSDaoImpl implements CustomerGMSDao {
-	
+
+
 	public List<Gymnasium> fetchGymList() {
 //		System.out.println("Connecting to database...");
 		List<Gymnasium> gymDetails = new ArrayList<Gymnasium>();
@@ -261,6 +262,55 @@ public class CustomerGMSDaoImpl implements CustomerGMSDao {
 		}
 		return false;
 	}
-	
-	
+
+	@Override
+	public int findAvailableSlots(int gymId, String slotId, String date) {
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		try {
+			conn = DBUtils.getConnection();
+			stmt = conn.prepareStatement(SQLConstants.SQL_FIND_USED_SLOTS);
+			stmt.setInt(1, gymId);
+		    stmt.setString(2, date);
+			stmt.setString(3,slotId);
+			ResultSet rs = stmt.executeQuery();
+			rs.next();
+			GymOwnerGMSDao gymOwnerGMSDao = new GymOwnerGMSDaoImpl();
+			Gymnasium gymDetails = gymOwnerGMSDao.getGymInfo(gymId);
+			return gymDetails.getNumSeatsPerSlot() - rs.getInt("COUNT(*)");
+		} catch(SQLException sqlExcep) {
+			System.out.println(sqlExcep);
+		} catch(Exception excep) {
+			excep.printStackTrace();
+		}
+		return -1;
+	}
+
+	public List<SlotsNew> allAvailableSlots(int gymId, String date){
+		List<SlotsNew> allSlots = new ArrayList<SlotsNew>();
+
+		Connection conn = null;
+		PreparedStatement stmt = null;
+
+		try {
+			conn = DBUtils.getConnection();
+			stmt = conn.prepareStatement(SQLConstants.SQL_CHECK_SLOT_FOR_GYM);
+			stmt.setInt(1, gymId);
+			ResultSet rs = stmt.executeQuery();
+			while(rs.next()) {
+				SlotsNew slotInfo = new SlotsNew();
+				slotInfo.setGymId(rs.getInt("gymId"));
+				slotInfo.setSlotId(rs.getString("slotId"));
+				slotInfo.setCapacity(findAvailableSlots(gymId,rs.getString("slotId"),date));
+				slotInfo.setSlotTime(rs.getString("slotTime"));
+				allSlots.add(slotInfo);
+			}
+		} catch(SQLException sqlExcep) {
+			System.out.println(sqlExcep);
+		} catch(Exception excep) {
+			excep.printStackTrace();
+		}
+		return allSlots;
+	}
+
 }

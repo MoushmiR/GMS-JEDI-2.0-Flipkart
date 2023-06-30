@@ -30,4 +30,7 @@ public interface CustomerGMSDao {
 
 	public boolean checkGymApprove(int gymId);
 
+    public int findAvailableSlots(int gymId, String slotId, String date);
+
+	public List<SlotsNew> allAvailableSlots(int gymId, String date);
 }

@@ -50,6 +50,7 @@ public class CustomerGMSService implements CustomerGMSInterface{
 	 * @return The booking ID if the slots are successfully booked, 0 if the slot is already booked and replaced, 1 if the slot is already full, 2 if the slots are successfully booked
 	 */
 	public int bookSlots(int gymId, String slotId, String email, String date) {
+		System.out.println("Book Slots Working!");
 		if(alreadyBooked(slotId, email, date)) {
 			customerDao.cancelBooking(slotId, email, date);
 			customerDao.bookSlots(gymId, slotId, email, date);

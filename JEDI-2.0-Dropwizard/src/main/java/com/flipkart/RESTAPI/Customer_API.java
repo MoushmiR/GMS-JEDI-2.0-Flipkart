@@ -91,4 +91,15 @@ public class Customer_API {
         }
     }
 
+    @Path("bookslots")
+    @POST
+    @Produces("application/json")
+    public static Response bookGymSlots(@QueryParam("gymId") int gymId, @QueryParam("slotId") String slotId, @QueryParam("email") String email, @QueryParam("date") String date) {
+        CustomerGMSInterface customerGMSService = new CustomerGMSService();
+        try {
+            return Response.ok(customerGMSService.bookSlots(gymId, slotId, email, date)).build();
+        } catch (Exception exception) {
+            return Response.status(Response.Status.UNAUTHORIZED).entity(exception.getMessage()).build();
+        }
+    }
 }

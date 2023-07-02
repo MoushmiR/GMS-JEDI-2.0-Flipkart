@@ -78,6 +78,19 @@ public class Customer_API {
         }
     }
 
+    @Path("mybookingsdate")
+    @GET
+    @Produces("application/json")
+    public static Response getBookingsNDate(@QueryParam("email") String email, @QueryParam("date") String date){
+        CustomerGMSDao customerGMSDao = new CustomerGMSDaoImpl();
+        try{
+            return Response.ok(customerGMSDao.fetchBookedSlotsNDate(email, date)).build();
+        }
+        catch(Exception exception){
+            return Response.status(Response.Status.UNAUTHORIZED).entity(exception.getMessage()).build();
+        }
+    }
+
     @Path("findavailability")
     @GET
     @Produces("application/json")

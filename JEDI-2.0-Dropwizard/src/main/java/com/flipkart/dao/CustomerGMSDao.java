@@ -15,6 +15,8 @@ public interface CustomerGMSDao {
 	public List<SlotsNew> fetchSlotList(int gymId) throws NoSlotsFoundException;
 	
 	public List<UserBookings> fetchBookedSlots(String email);
+
+	public List<UserBookings> fetchBookedSlotsNDate(String email, String date);
 	
 	public Object bookSlots(int gymId, String slotId, String customerId, String date);
 	

@@ -35,4 +35,6 @@ public class SQLConstants {
 	public static final String SQL_CHECK_SLOT_FOR_GYM = "SELECT * FROM SlotsNew WHERE gymId=?";
     public static final String SQL_FETCH_GYM_INFO = "SELECT * FROM Gymnasium WHERE gymId=?";
 	public static final String SQL_FIND_USED_SLOTS = "SELECT COUNT(*) FROM BookedSlot WHERE gymId=? AND date=? AND slotId=?";
+
+	public static final String SQL_FETCH_BOOKED_SLOT_DATE_QUERY = "SELECT DISTINCT BookedSlot.bookingId, Slots.slotId, Gymnasium.name, Gymnasium.address, BookedSlot.date, Slots.startTime FROM BookedSlot JOIN Gymnasium ON BookedSlot.gymId = Gymnasium.gymId JOIN Slots ON BookedSlot.slotId = Slots.slotId WHERE BookedSlot.customerEmail=? AND BookedSlot.date=?";
 }

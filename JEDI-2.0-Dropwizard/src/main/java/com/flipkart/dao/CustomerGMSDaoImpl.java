@@ -152,6 +152,37 @@ public class CustomerGMSDaoImpl implements CustomerGMSDao {
 		}
 		return bookedSlots;
 	}
+
+	public List<UserBookings> fetchBookedSlotsNDate(String email, String date) {
+
+		List<UserBookings> bookedSlots = new ArrayList<UserBookings>();
+
+		Connection conn = null;
+		PreparedStatement stmt = null;
+
+		try {
+			conn = DBUtils.getConnection();
+			stmt = conn.prepareStatement(SQLConstants.SQL_FETCH_BOOKED_SLOT_DATE_QUERY);
+			stmt.setString(1, email);
+			stmt.setString(2, date);
+			ResultSet rs = stmt.executeQuery();
+			while(rs.next()) {
+				UserBookings userBooking = new UserBookings();
+				userBooking.setBookingId(rs.getInt("bookingId"));
+				userBooking.setSlotId(rs.getString("slotId"));
+				userBooking.setName(rs.getString("name"));
+				userBooking.setDate(rs.getString("date"));
+				userBooking.setAddress(rs.getString("address"));
+				userBooking.setStartTime(rs.getString("startTime"));
+				bookedSlots.add(userBooking);
+			}
+		} catch(SQLException sqlExcep) {
+			System.out.println(sqlExcep);
+		} catch(Exception excep) {
+			excep.printStackTrace();
+		}
+		return bookedSlots;
+	}
 	
 	
 	public void cancelBooking(String slotId, String email, String date) {
